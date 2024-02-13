@@ -4,6 +4,9 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   setCookie,
   getCookie,
@@ -53,10 +56,11 @@ export const SignupForm = (props) => {
         navigate("/validUsername");
       });
     } catch (error) {
-      if (error.response && error.response.status === 409) {
+      if (error.response && error.response.status === 406) {
         setErrorMessage(error.response.data.message);
+        toast.error(error.response.data.message);
       } else {
-        console.error("Error:", error.message);
+        toast.error(error.message);
       }
     }
   };
@@ -148,6 +152,7 @@ export const SignupForm = (props) => {
           Sign Up
         </button>
       </form>
+      <ToastContainer />
     </>
   );
 };

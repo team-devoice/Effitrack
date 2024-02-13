@@ -7,9 +7,12 @@ const getRepoDetails = async  (req,res) =>{
     try{
         const username = req.user.github;
         const response  =await  getGithubRepo(username);
-        res.status(200).json({error:false,message:response});
+        if (username === "unknown") {
+            return res.status(404).json({error:true,message:'enter your platform name'});
+        }
+        return res.status(200).json({error:false,message:response});
     }catch(err){
-        res.status(500).json({error:true,message:err.message});
+        return res.status(500).json({error:true,message:err.message});
     }
 }
 
@@ -24,9 +27,9 @@ const postRepoDetails = async  (req,res) =>{
           }).then((r) => {
             console.log(r.data.data.user.contributionsCollection.contributionCalendar)
         })
-        res.status(200).json({data:response});
+        return res.status(200).json({data:response});
     }catch(err){
-        res.status(500).json({Error:"Git occured while fetching the github data"});
+        return res.status(500).json({Error:"Git occured while fetching the github data"});
     }
 }
 
@@ -61,7 +64,10 @@ const githubProfile= async (req,res)=>{
             method: 'GET',
         })
         const data =await response.json();
-        if (data.hasOwnProperty('message') && data.message == 'Not Found') {
+        if (username === "unknown") {
+            return res.status(404).json({error:true,message:'enter your platform name'});
+        }
+        else if (data.hasOwnProperty('message') && data.message == 'Not Found') {
            return res.status(404).json({error:true,message:'Username not found'});
         }
         else if(data.hasOwnProperty('message') && data.message.includes('API rate limit exceeded')){

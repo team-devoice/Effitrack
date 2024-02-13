@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import GitRepo from "../../assets/github.png";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./dashboard.css";
 import { FaRegFolderClosed } from "react-icons/fa6";
 import Fab from '@mui/material/Fab';
@@ -83,7 +83,7 @@ const Showcase = () => {
   const githubDetails = useSelector((store) => store.githubDetails);
   const { userGithubRepo } = githubDetails;
   const [repoDetails, setRepoDetails] = useState("");
-
+  const { id } = useParams();
   useEffect(() => {
     setRepoDetails(userGithubRepo);
   }, [userGithubRepo]);
@@ -172,9 +172,14 @@ const Showcase = () => {
             }
           </div>
           <div className="absolute bottom-2 right-2 m-4">
-            <Fab color="primary" size="small" aria-label="add" onClick={()=>{setShow(!show)}}>
-              <AddIcon />
-            </Fab>
+            {
+              id !== undefined ? <></>
+              :
+              <Fab color="primary" size="small" aria-label="add" onClick={()=>{setShow(!show)}}>
+                <AddIcon />
+               </Fab>
+            }
+            
           </div>
         </div>
       </div>

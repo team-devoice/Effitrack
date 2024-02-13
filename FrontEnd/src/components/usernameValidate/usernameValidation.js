@@ -162,7 +162,7 @@ const UserValid = () => {
     }
   };
   useEffect(() => {
-    if (ccflag === 1 || cfflag === 1 || lcflag === 1 || githubFlag === 1) {
+    if ( ccflag === 1 && cfflag === 1 && lcflag === 1 && githubFlag === 1 ) {
       saveUsername().then((res) => {
         if (res) {
           const waitBro = new Promise((resolve, reject) => {

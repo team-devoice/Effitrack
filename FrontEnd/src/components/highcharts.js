@@ -35,9 +35,6 @@ const Chart = () => {
   
   useEffect(() => {
     checkAuth();
-    console.log("leetcode",rating)
-    console.log("codeforces",cfRating)
-
   }, [rating, cfRating ,id]);
 
   const checkAuth = async () => {
@@ -102,9 +99,6 @@ const Chart = () => {
           data: Rating,
           color: "green",
           marker: {
-            // radius: 5, // Adjust marker size
-            // // symbol: 'triangle', // Change marker shape (see https://api.highcharts.com/highcharts/series.line.marker.symbol for options)
-            // fillColor: 'blue', // Set marker fill color
             lineWidth: 1, // Set marker outline width
             lineColor: "lightgreen",
             symbol: "circle",

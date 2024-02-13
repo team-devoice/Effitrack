@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LeetCode_logo from "../../assets/LeetCode_logo.png";
+import LeetCode_logo from "../../assets/jpg/LeetCode_logo.jpg";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Codechef_logo from "../../assets/codechef-01.png";
@@ -30,7 +30,7 @@ export const LeetcodeCard = () => {
           <Link  to={`${userDetials.leetcode === "unknown" ? '#' : leetcodeUrl}`} target="_blank" className={`${userDetials.leetcode === "unknown" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 
             <div
-              className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-2`}
+              className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-x-2`}
             >
               <img src={LeetCode_logo} alt="leetlogo" className="h-5"></img>
               <h1>Leetcode</h1>
@@ -203,7 +203,7 @@ export const CodeforcesCard = () => {
         className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo shadow-xl hover:shadow`}
       >
         <div className="card-details ">
-          <Link  to={`${userDetials.codechef === "unknown" ? '#' : codeforcesUrl}`} target="_blank" className={`${userDetials.codechef === "unknown" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+          <Link  to={`${userDetials.codeforces === "unknown" ? '#' : codeforcesUrl}`} target="_blank" className={`${userDetials.codeforces === "unknown" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 
             <div
               className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-2`}

@@ -7,8 +7,11 @@ const getLcCount = async (req,res) =>{
     try{
         const username = req.user.leetcode;
         const submitStats = await getLeetCount(username);
+        if(username === "unknown"){
+            return res.status(404).json({message:true,message:"No data from Leetcode Api"})
+        }
         if(submitStats.length === 0){
-            res.status(404).json({message:true,message:"No data from Leetcode Api"})
+            return res.status(404).json({message:true,message:"No data from Leetcode Api"})
         }
         return res.status(200).json({error:false,message:submitStats.message});
     }catch(err){
@@ -22,6 +25,9 @@ const getLcRating =async (req,res) =>{
     try{
         const username = req.user.leetcode;
         var submitStats =await getLeetRating(username);
+        if(username === "unknown"){
+            return res.status(404).json({error:true,message:'Username not found or network problem'})
+        }
         if(submitStats.error){
             return res.status(404).json({error:true,message:'Username not found or network problem'})
         }

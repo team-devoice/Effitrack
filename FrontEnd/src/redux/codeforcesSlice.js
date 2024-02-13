@@ -9,7 +9,7 @@ const initialState = {
       city: "unknown",
       rating: 0,
       friendOfCount: 0,
-      titlePhoto: "xx",
+      titlePhoto: "x",
       handle: "unknown",
       avatar: "unknown",
       firstName: "unknown",

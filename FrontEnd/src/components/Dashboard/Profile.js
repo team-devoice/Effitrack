@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import temp_logo from "../../assets/temp_logo.jpeg";
 import { useSelector } from "react-redux";
 import {deleteCookie} from "../../services/servicehelp.js";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaCircleChevronDown } from "react-icons/fa6";
 import { RiEditCircleFill } from "react-icons/ri";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -15,6 +15,7 @@ const Profile = () => {
   const [role, setRole] = useState("Student");
   const [subProfile,setSubProfile] = useState(false);
   const [isDropdown,setIsDropdown] = useState(false);
+  const {id} = useParams();
 
   return (
     <>
@@ -28,9 +29,15 @@ const Profile = () => {
             <small>{role}</small>
           </div>
         </div>
-        <button className="text-xl mt-1 ml-2" onClick={() => setIsDropdown(!isDropdown)} aria-label="Toggle Dropdown">
-        <FaCircleChevronDown />
-        </button>
+        {
+          id === undefined ?
+          <button className="text-xl mt-1 ml-2" onClick={() => setIsDropdown(!isDropdown)} aria-label="Toggle Dropdown">
+            <FaCircleChevronDown />
+          </button>
+          :
+          <></>
+        }
+        
         {isDropdown && ( 
           <div className="pop-up subProfile">
           <div className=" flex flex-col gap-y-2 cursor-pointer">

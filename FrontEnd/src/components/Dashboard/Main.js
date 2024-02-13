@@ -5,8 +5,10 @@ import Showcase from "./Showcase";
 import Shimmer from "./Shimmer";
 import EditProfile from "../ProfilePage/Editprofile";
 import Footer from "../Footer";
+import { useParams } from "react-router-dom";
 
 const Main = (props) => {
+  const {id} = useParams();
   return (
     <div className="overflow-hidden lg:h-full h-[100vh]">
       <div className="overflow-hidden h-full dark:bg-[#333] bg-[#e1e1e1] p-3 pb-0 ">
@@ -14,7 +16,7 @@ const Main = (props) => {
             <div>
                <Navbar
                className=""
-               title={"Dashboard"}
+               title={`${id === undefined ? "Dashboard" :"Friends"}`}
               />
               <div>
                 <Mid />

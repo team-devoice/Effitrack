@@ -32,11 +32,11 @@ function App() {
   }, [id]);
 
   useEffect(() => {
+    checkAuth();
     leetcodeData();
     codeforcesData();
     codechefData();
     githubData();
-    checkAuth();
   }, []);
 
   const checkAuth = async () => {

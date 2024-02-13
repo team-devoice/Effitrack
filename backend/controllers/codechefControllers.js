@@ -6,7 +6,7 @@ const getCodeChefDetails =async (req,res)=>{
     try{
         const username = req.user.codechef; 
         const response = await getChefData(username);
-        if(response.error){
+        if(response.error || username === "unknown"){
            return res.status(404).json({error:true,message:"username not found"});
         }
         return res.status(200).json({error:false,message:response.message});

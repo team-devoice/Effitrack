@@ -1,10 +1,9 @@
-import Leetcode from "../../assets/LeetCode_logo.png";
+
 import CodeChef from "../../assets/codechef.jpeg";
 import Codeforces_logo from "../../assets/codeforces.png";
-import { useNavigate } from "react-router-dom";
-import { getCookie } from "../../services/servicehelp";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import Leetcode_logo from "../../assets/jpg/LeetCode_logo.jpg"
+import atCoder_logo from "../../assets/jpg/atcoder.jpg"
+import geekforgeeks_logo from "../../assets/svg/gglogo.svg"
 import { useSelector } from "react-redux";
 const tokenName = process.env.REACT_APP_JWT_NAME;
 
@@ -12,6 +11,13 @@ const Contest = (props) => {
   const { onecontestData } = props;
 
   const helper = (line, val) => {
+      if(line.includes("AtCoder")){
+          const spliting = line.split("AtCoder");
+          var res = spliting[1];
+          res.trim();
+          res = res.substring(0,res.length-1)
+          return "AtCoder "+res;
+      }
       const words = line.split(val);
       const firstTwoWords = words.slice(0, 2);
       if(val === 'T'){
@@ -31,10 +37,20 @@ const Contest = (props) => {
       >
         <div>
           {
-            onecontestData?.resource?.name.includes("codechef") ? 
-                <img src={CodeChef} alt="leetcode"className="w-[30px] h-[30px]"></img>
+            onecontestData?.resource?.name?.includes("codechef") ? 
+                (<img src={CodeChef} alt="codechef"className="w-[30px] h-[30px]"></img>)
             :
-              <img src={Codeforces_logo} alt="leetcode" className="w-[30px] h-[30px]"></img>
+            onecontestData?.resource?.name?.includes("codeforces") ?
+            (<img src={Codeforces_logo} alt="codeforces" className="w-[30px] h-[30px] "></img>)
+            : 
+            onecontestData?.resource?.name?.includes("leetcode") ?
+            (<img src={Leetcode_logo} alt="leetcode" className="w-[30px] h-[30px]"></img>)
+            : 
+            onecontestData?.resource?.name?.includes("atcoder") ?
+            (<img src={atCoder_logo} alt="atcoder" className="w-[30px] h-[30px] "></img>)
+            : onecontestData?.resource?.name?.includes("geeksforgeeks") ?
+            (<img src={geekforgeeks_logo} alt="atcoder" className="w-[30px] h-[30px] "></img>)
+            : <></>
           }
           
         </div>
@@ -43,9 +59,6 @@ const Contest = (props) => {
             <h1 className="font-semibold text-sm">{helper(onecontestData.event,' ')}</h1>
             <small className="font-medium">{helper(onecontestData.start,'T')} </small>
           </div>
-          {/* <h2 className="font-semibold text-base">
-            {onecontestData.resource.name}
-          </h2> */}
         </div>
       </a>
     </>
