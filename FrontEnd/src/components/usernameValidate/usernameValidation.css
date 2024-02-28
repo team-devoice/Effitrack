@@ -25,11 +25,11 @@
   .valid_top {
     @apply text-center flex flex-col gap-y-4;
   }
-  .validation_div form {
+  .validation_div > div {
     /* @apply grid grid-cols-2 gap-8 mt-6; */
     @apply flex flex-wrap mt-6 justify-center gap-8 
   }
-  .validation_div > form > div {
+  .validation_div > div > div {
     /* @apply flex flex-col gap-y-4 w-[80%]  m-auto h-[10rem]; */
     @apply sm:w-[45%] w-[80%] gap-y-4 h-[10rem] flex flex-col items-center
   }

@@ -6,6 +6,9 @@ import axios from "axios";
 import { getCookie } from "../../services/servicehelp";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+
+
 const Err = () => {
   return (
     <>
@@ -76,8 +79,8 @@ const UserValid = () => {
   
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const verifyUsername = async (e) => {
+    // e.preventDefault();
     const url = process.env.REACT_APP_BASE_URL;
     const authToken = getCookie("jwtToken");
     if (!authToken) {
@@ -161,58 +164,67 @@ const UserValid = () => {
       setGithubFlag(2);
     }
   };
-  useEffect(() => {
-    if ( ccflag === 1 && cfflag === 1 && lcflag === 1 && githubFlag === 1 ) {
-      saveUsername().then((res) => {
-        if (res) {
-          const waitBro = new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve("Promise resolved after 2 seconds");
-            }, 2000);
-          });
-          waitBro.then((waiting_over) => {
-            navigate("/");
-          });
-        } else {
-          const waitBro = new Promise((resolve, reject) => {
-            setVerified(2);
-            setTimeout(() => {
-              resolve();
-            }, 2000);
-          });
-          waitBro.then((waiting_over) => {
-            setVerified(0);
-          });
-        }
-      });
-    }
-  }, [lcflag, ccflag, cfflag, githubFlag]);
+  // useEffect(() => {
+  //   if ( 
+  //     (ccflag === 1 || ccUsername==='') && (cfflag === 1 || cfUsername === '') && (lcflag === 1 || lcUsername === '') && (githubFlag === 1 || githubUsername === '')
+  //   ) {
+  //     // alert(`${ccUsername} & ${cfUsername} & ${lcUsername} & ${githubUsername}`)
+  //     saveUsername().then((res) => {
+  //       if (res) {
+  //         const waitBro = new Promise((resolve, reject) => {
+  //           setTimeout(() => {
+  //             resolve("Promise resolved after 2 seconds");
+  //           }, 2000);
+  //         });
+  //         waitBro.then((waiting_over) => {
+  //           navigate("/");
+  //         });
+  //       } else {
+  //         const waitBro = new Promise((resolve, reject) => {
+  //           setVerified(2);
+  //           setTimeout(() => {
+  //             resolve();
+  //           }, 2000);
+  //         });
+  //         waitBro.then((waiting_over) => {
+  //           setVerified(0);
+  //         });
+  //       }
+  //     });
+  //   }
+  // }, [lcflag, ccflag, cfflag, githubFlag]);
 
   const saveUsername = async () => {
-    const authToken = getCookie("jwtToken");
-    const body = {
-      leetcode: lcUsername,
-      codechef: ccUsername,
-      codeforces: cfUsername,
-      github: githubUsername,
-    };
-    const axiosInstance = axios.create({
-      headers: {
-        common: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "application/json",
-        },
-      },
-    });
-    try {
-      const savedUsername = await axiosInstance.post(
-        `${process.env.REACT_APP_BASE_URL}/user/verifedUsername`,
-        body,
-      );
-      return true;
-    } catch (err) {
-      return false;
+    if ( (ccflag === 1 || ccUsername==='') && (cfflag === 1 || cfUsername === '') && (lcflag === 1 || lcUsername === '') && (githubFlag === 1 || githubUsername === '') ){
+        const authToken = getCookie("jwtToken");
+        const body = {
+          leetcode: lcUsername,
+          codechef: ccUsername,
+          codeforces: cfUsername,
+          github: githubUsername,
+        };
+        const axiosInstance = axios.create({
+          headers: {
+            common: {
+              Authorization: `Bearer ${authToken}`,
+              "Content-Type": "application/json",
+            },
+          },
+        });
+        try {
+          const savedUsername = await axiosInstance.post(
+            `${process.env.REACT_APP_BASE_URL}/user/verifedUsername`,
+            body,
+          );
+          navigate("/");
+        } catch (err) {
+          return false;
+        }
+    } 
+    else{
+      alert(`Enter Correct Username , If you don't have username leave it blank , verify before saving`)
     }
+
   };
 
   return (
@@ -229,16 +241,15 @@ const UserValid = () => {
             </h4>
           </div>
           <div className="validation_div">
-            <form onSubmit={handleSubmit}>
+            <div>
               <div>
-                <label htmlFor="">Enter Leetcode Username  <span className="text-red-500 text-lg">*</span></label>
+                <label htmlFor="">Enter Leetcode Username  <span className="text-red-500 text-lg">(optional*)</span></label>
                 <input
                   type="text"
                   id="leetcode"
                   value={lcUsername}
                   placeholder="Enter here"
                   onChange={(e) => setLcUsername(e.target.value)}
-                  required
                   className="block w-[80%] py-1 px-0 text-sm text-white bg-transparent border-0 border-b-2 borer-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus-text-white focus:border-blue-600 peer items-center"
                 ></input>
                 {lcflag === 0 ? (
@@ -252,14 +263,14 @@ const UserValid = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="codechef">Enter Codechef Username <span className="text-red-500 text-lg">*</span></label>
+                <label htmlFor="codechef">Enter Codechef Username <span className="text-red-500 text-lg">(optional*)</span></label>
                 <input
                   type="text"
                   placeholder="Codechef username"
                   id="codechef"
                   value={ccUsername}
                   onChange={(e) => setCcUsername(e.target.value)}
-                  required
+          
                   className="block w-[80%] py-1 px-0 text-sm text-white bg-transparent border-0 border-b-2 borer-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus-text-white focus:border-blue-600 peer items-center"
                 ></input>
                 {ccflag === 0 ? (
@@ -273,14 +284,14 @@ const UserValid = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="codeforces">Enter Codeforces Username  <span className="text-red-500 text-lg">*</span></label>
+                <label htmlFor="codeforces">Enter Codeforces Username  <span className="text-red-500 text-lg">(optional*)</span></label>
                 <input
                   type="text"
                   placeholder="Codeforces username"
                   id="codeforces"
                   value={cfUsername}
                   onChange={(e) => setCfUsername(e.target.value)}
-                  required
+                  
                   className="block w-[80%] py-1 px-0 text-sm text-white bg-transparent border-0 border-b-2 borer-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus-text-white focus:border-blue-600 peer items-center"
                 ></input>
                 {cfflag === 0 ? (
@@ -294,14 +305,13 @@ const UserValid = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="github">Enter GitHub Username  <span className="text-red-500 text-lg">*</span></label>
+                <label htmlFor="github">Enter GitHub Username  <span className="text-red-500 text-lg">(optional*)</span></label>
                 <input
                   type="text"
                   placeholder="Github username"
                   id="github"
                   value={githubUsername}
                   onChange={(e) => setGithubUsername(e.target.value)}
-                  required
                   className="block w-[80%]  py-1 px-0 text-sm text-white bg-transparent border-0 border-b-2 borer-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus-text-white focus:border-blue-600 peer items-center"
                 ></input>
                 {githubFlag === 0 ? (
@@ -316,8 +326,15 @@ const UserValid = () => {
               </div>
               <div className="submit_div translate-y-[-1rem] -mt-2">
                 {verified === 0 ? (
-                  <div>
-                    <button className=" font-bold mb-4 text-[18px]  rounded-full bg-white text-violet-800 hover:bg-violet-600 hover:text-white py-2 px-10 transition colors duration-300 ">Submit</button>
+                  <div className="flex flex-row gap-x-8">
+                    <button 
+                      className=" font-bold mb-4 text-[18px]  rounded-full bg-white text-violet-800 hover:bg-violet-600 hover:text-white py-2 px-10 transition colors duration-300 "
+                      onClick={()=>verifyUsername()}
+                    >Verify</button>
+                    <button 
+                      className=" font-bold mb-4 text-[18px]  rounded-full bg-white text-violet-800 hover:bg-violet-600 hover:text-white py-2 px-10 transition colors duration-300 "
+                      onClick={()=>saveUsername()}
+                    >Save</button>
                   </div>
                 ) : verified === 1 ? (
                   <div>
@@ -333,7 +350,7 @@ const UserValid = () => {
                   </div>
                 )}
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </section>
