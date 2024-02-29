@@ -115,28 +115,16 @@ export const Profile_edit = () => {
       <div className="h-[10rem] w-[10rem] rounded-full transform sm:translate-y-[40%] translate-y-[30%]">
         {/* <ImageUpload/> */}
         <img
-          // src={`https://avatar.vercel.sh/${userDetials.username}.svg?text=${userDetials.username}`}
           src={GithubProfile.avatar_url}
           alt="profile pic"
           className="rounded-full"
         ></img>
-          {/* <input
-            type="file"
-            id="file-input" name="file-input"
-            className="hidden"
-            onChange={handleImageChange}
-          />
-          <label for="file-input" className="profile_edit_cover"></label>
-          i dont know how this shit works */}
+
       </div>
       <div className="flex flex-col gap-2 mx-10">
         <div className="flex gap-3">
           <div className=" text-5xl">{userDetials.username}</div>
           <div className="flex items-end">
-            {/* <img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACt0lEQVR4nO2ZO2gVQRSGP70xoLHQwicWBhULQVFRW1EktZhGQQtLH7ET0kVREJtgYyESSW6iBBS0sVIrEXyAqUVsEowWvoiiV/SODMziYdnHzOzrLtwfTnPnzNn/nzl7zsxe6KKLjsBy4DBwFXgCvAU+AQr4CswBM8BtYBjYByymA6CJTADfDVkX+2gEb6iC+GbgLtD2IB62FnAF6CuL/AlgIQfiYXsDbCuSuM7Z6wUQV8K+AHuKIL8IuFEweWVMv/yb8hZwsSTyytjLPKvUfuBPyQIUcDIP8kuB2QrIK2DePD8TzmckocvspOkVPiV3MAv5PtFNfW1MxGt6zL+XRcAxy9VtJqzugIgXVLG2mZM0L7DPWQQ8TAk+InwnI8a/Ab2iDAfvkiYeYMRiF1b5kF8C/EwI+hhopKTHtBjfLX6XAhomVpKAHT4CdqYcwtZblNmjMX3kL3BIjK0G3ic8z6upHY8Jph9+UPitNeUu7PcbWCn8ZkLj82ZugAMJvUYvkDPOxgQbt9z+R8Jvo2Uajsf4vTDvkBOGMwoYEn5DlgImEtJIZ4QTziWkkMzfNTH52y98okR+ANY5HFfmXO8LgwnB0h7+WoytMO+DzyKohLKdil0pwcLbL/vAhZRmqFPFpYwqYz9crp8Nc7mwXZEp8buu+QGmI+ZpsS6NTMX0kFTcTwmmjwF3QkeCWVExek03jprXNHPbjgK0/15bAUccgytz3gkw4DFfWdg1WwE9HncBucVjBQkYxQGnPbbY9qTpYzolt7oIaEQcA6qwtvkOtQXPr2+tigVsJyNOVSwgF9yqu4BlwLs6C/CpSh0noL8C8gt5CuipQMBzckbZAs7UWcAr8WmmdgKehi7+HSvgJvAAeGYu8FPmJFzYn4B5CygdtRfQypH8ryoEXM5JhI5xqQoBXXTBf/wDVNJccyCI65wAAAAASUVORK5CYII="
-              alt="dev"
-            /> */}
             <span class="material-icons-sharp font-semibold text-[2.5rem]">
               psychology
             </span>
@@ -185,7 +173,12 @@ export const Leetcode_edit = () => {
   const myUserDetails = useSelector((state) => state.userDetails);
   const { userDetials } = myUserDetails;
   useEffect(() => {
-    setUsername(userDetials.leetcode);
+    if(userDetials.leetcode === ''){
+      setUsername('None')
+    }else{
+      setUsername(userDetials.leetcode);
+    }
+    
   }, [userDetials.leetcode]);
   const handleEdit = (val) => {
     if (val === true) {
@@ -230,6 +223,7 @@ export const Leetcode_edit = () => {
                 readOnly
                 value={username}
               />
+              // <p className="bg-transparent w-full px-4">{username}</p>
             )}
           </div>
         </div>
@@ -246,7 +240,11 @@ export const Codeforces_edit = () => {
   const myUserDetails = useSelector((state) => state.userDetails);
   const { userDetials } = myUserDetails;
   useEffect(() => {
-    setUsername(userDetials.codeforces);
+    if(userDetials.codeforces === ''){
+      setUsername('None')
+    }else{
+      setUsername(userDetials.codeforces);
+    }
   }, [userDetials.codeforces]);
 
   const handleEdit = (val) => {
@@ -312,7 +310,11 @@ export const Codechef_edit = () => {
   const myUserDetails = useSelector((state) => state.userDetails);
   const { userDetials } = myUserDetails;
   useEffect(() => {
-    setUsername(userDetials.codechef);
+    if(userDetials.codechef === ''){
+      setUsername('None');
+    }else{
+      setUsername(userDetials.codechef);
+    }
   }, [userDetials.codechef]);
   const handleEdit = (val) => {
     if (val === true) {
@@ -373,7 +375,11 @@ export const Github_edit = () => {
   const myUserDetails = useSelector((state) => state.userDetails);
   const { userDetials } = myUserDetails;
   useEffect(() => {
-    setUsername(userDetials.github);
+    if(userDetials.github === ''){
+      setUsername('None');
+    }else{
+      setUsername(userDetials.github);
+    }
   }, [userDetials.github]);
   const submitLeet = async () => {
     const authToken = getCookie(tokenName);
