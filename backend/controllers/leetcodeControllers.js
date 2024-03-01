@@ -57,12 +57,25 @@ const checkLcUsername = async (req,res) =>{
     }
 }
 
+const getLeetcodeData = async (req, res) => {
+    try{
+
+    }
+    catch(error){
+        res.status(504).json({error:true, message:error.message})
+    }
+}
+
 
 const  getLeetcodeBatch = async (req,res) =>{
     
     try{
+        console.log("check")
         const leetcode = req.user.leetcode;
         const response = await getLeetcodeBadges(leetcode)
+        if(response.length === 0){
+            return res.status(500).json({error:true,message:"Error occurred while fetching the data from the leetcode api"})
+        }
         userBadges = [];
         response.badges.map((badge)=>{
             userBadges.push({
@@ -70,7 +83,7 @@ const  getLeetcodeBatch = async (req,res) =>{
                 icon: badge.icon
             })
         })
-        if(userBadges.length() === 0){
+        if(userBadges.length === 0){
             return res.status(200).json({error:false, message: "user dont have badges"})
         }
         return  res.status(200).json({error:false,message: userBadges});
@@ -84,5 +97,5 @@ const  getLeetcodeBatch = async (req,res) =>{
 
 
 module.exports = {
-    getLcCount,getLcRating,checkLcUsername , getLeetcodeBatch
+    getLcCount,getLcRating,checkLcUsername , getLeetcodeBatch, getLeetcodeData
 }
