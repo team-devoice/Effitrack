@@ -1,5 +1,5 @@
 const axios = require("axios");
-const {getLeetCount , getLeetRating} = require('../utils/LeetcodeFun');
+const {getLeetCount , getLeetRating, getLeetcodeBadges} = require('../utils/LeetcodeFun');
 
 
 const getLcCount = async (req,res) =>{
@@ -62,13 +62,18 @@ const  getLeetcodeBatch = async (req,res) =>{
     
     try{
         const leetcode = req.user.leetcode;
-        const response = await axios.get(`https://alfa-leetcode-api.vercel.app/${leetcode}/badges`);
-        if(response.data.badgesCount === 0){
-
-            return res.status(202).json({error:true,message:"User doesn't have badges"})
-            // 204 no content
+        const response = await getLeetcodeBadges(leetcode)
+        userBadges = [];
+        response.badges.map((badge)=>{
+            userBadges.push({
+                shortname: badge.shortName,
+                icon: badge.icon
+            })
+        })
+        if(userBadges.length() === 0){
+            return res.status(200).json({error:false, message: "user dont have badges"})
         }
-        return  res.status(200).json({error:false,message:response.data});
+        return  res.status(200).json({error:false,message: userBadges});
         // 200 success
     }   
     catch(err){

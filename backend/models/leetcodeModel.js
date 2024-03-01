@@ -16,6 +16,7 @@ const leetcodeSchema = new Schema({
     total_contest:{type:Number,default:0},  
     contest:[{title:String,rank:Number,rating:Number}],
     globalRating:Number,
+    badges: [{sortName: String, icon: String}]
 })
 
 

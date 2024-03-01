@@ -1,3 +1,49 @@
+const getLeetcodeBadges = async(UserName) => {
+  const url = "https://leetcode.com/graphql";
+  const query = `
+    {
+      matchedUser(username: "${UserName}") {
+          badges {
+            id
+            name
+            shortName
+            displayName
+            icon
+            hoverText
+            medal {
+              slug
+              config {
+                iconGif
+                iconGifBackground
+              }
+            }
+            creationDate
+            category
+          }
+          upcomingBadges {
+            name
+            icon
+            progress
+          }
+        }
+    }`;
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    try{
+      const response = await fetch(url, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ query }),
+        })
+        const data = await response.json();
+        // console.log(data)
+        return data.data.matchedUser;
+    } catch(err){
+        return {error:true,message:'internet problem'}
+    }
+}
+
 const getLeetCount =  async (Username) =>{
     const url = "https://leetcode.com/graphql";
     const query = `
@@ -100,5 +146,5 @@ const getLeetRating = async (username) =>{
   
 
 module.exports = {
-    getLeetCount , getLeetRating
+    getLeetCount , getLeetRating, getLeetcodeBadges
 }

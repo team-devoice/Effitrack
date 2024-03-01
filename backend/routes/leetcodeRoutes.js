@@ -7,7 +7,7 @@ const {authPublic} =require("../middleware/publicMiddleware");
 router.route('/count').get(auth,getLcCount).post(authPublic,getLcCount)
 router.route('/rating').get(auth,getLcRating).post(authPublic,getLcRating);
 router.route('/exist').post(auth,checkLcUsername)
-router.route('/batches').get(auth,getLeetcodeBatch).post(authPublic,getLeetcodeBatch);
+router.route('/badges').get(auth,getLeetcodeBatch).post(authPublic,getLeetcodeBatch);
 
 
 
