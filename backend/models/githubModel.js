@@ -3,18 +3,19 @@ const {Schema,model} = mongoose;
 
 
 const githubSchema = new Schema({
-    username:{
-        type:String,
-        required:true,
-        unique:true,
-    },
-    platform_name:String,
+
+    github_username:{type:String,required:true},
+    followers: {type:Number,default:0},
+    following: {type:Number,default:0},
+    public_repos: {type:Number,default:0},
+    public_gists: {type:Number,default:0},
     repo:{
         type:[
             {
                 name:String,
                 url:String,
                 desc:String,
+                ano_url: String //dont remove 
             }
         ],
         default:[]
