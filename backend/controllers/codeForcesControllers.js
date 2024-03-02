@@ -66,7 +66,7 @@ const getCFcount = async (req,res) =>{
     try{
         const username = req.user.codeforces;
         const response = await getForceCount(username);
-        if(response.error || username === "unknown"){
+        if(response.error || username === ""){
             return res.status(404).json({error:true,message:response.message})
         }
         return res.status(200).json({error:false,message:response.message});
@@ -80,7 +80,7 @@ const getCFrating = async (req,res) =>{
     try{
         const username = req.user.codeforces;
         const response = await getForceRating(username);
-        if(response.error || username === "unknown"){
+        if(response.error || username === ""){
             return res.status(404).json({error:true,message:response.message})
         }
         return res.status(200).json({error:false,message:response.message});

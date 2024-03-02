@@ -4,10 +4,10 @@ const initialState = {
   userDetials: {
     username: "unknown",
     email: "unknown",
-    leetcode: "unknown",
-    codeforces: "unknown",
-    codechef: "unknown",
-    github: "unknown",
+    leetcode:'',
+    codeforces: '',
+    codechef: '',
+    github: '',
     socialMedia:{
       linkedIn: undefined,
       twitter: undefined,

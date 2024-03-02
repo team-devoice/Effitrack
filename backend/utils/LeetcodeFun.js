@@ -143,7 +143,57 @@ const getLeetRating = async (username) =>{
    
     
 }
+
+
+const getProblems =  async (Username) =>{
+  const url = "https://leetcode.com/graphql";
+  const query = `
+  {
+    problemsetQuestionList($categorySlug: String, $limit: Int, $skip: Int, $filters: QuestionListFilterInput)
+    { 
+        problemsetQuestionList: questionList(
+            categorySlug: $categorySlug
+            limit: $limit
+            skip: $skip
+            filters: $filters
+            ) {
+                total: totalNum
+                questions: data {
+                                acRate
+                                difficulty   
+                                freqBar     
+                                frontendQuestionId: questionFrontendId          isFavor      
+                                paidOnly: isPaidOnly      
+                                status      
+                                title      
+                                titleSlug      
+                                topicTags {        name        id        slug      }     hasSolution      
+                                hasVideoSolution    }  }}
+    
   
+  }
+  `;
+
+  const headers = {
+  "Content-Type": "application/json",
+  };
+
+  try{
+    const response = await fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({ query }),
+      })
+      // const data = await response.json();
+      console.log(response);
+  } catch(err){
+      return {error:true,message:err}
+  }
+  
+}
+ getProblems().then((data)=>{
+  console.log(data)
+})
 
 module.exports = {
     getLeetCount , getLeetRating, getLCBadges
