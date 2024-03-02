@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import Codechef_logo from "../../assets/codechef-01.png";
 import Codeforces_logo from "../../assets/codeforces.png";
 import { Link } from "react-router-dom";
+import CountUp from 'react-countup';
+
 
 
 export const LeetcodeCard = () => {
@@ -11,8 +13,8 @@ export const LeetcodeCard = () => {
   const userSlice = useSelector((store) => store.userDetails);
   const {userDetials} = userSlice;
   const { count } = leetcodeDetails;
-
   const [leetcodeUrl,setLeetcodeUrl] = useState('#');
+
 
   useEffect(()=>{
     if(userDetials.leetcode !== "unknown"){
@@ -44,11 +46,11 @@ export const LeetcodeCard = () => {
                   <h1>Leetcode</h1>
                 </div>
               </Link>
-
+  
               <div className="px-2 text-[#333] dark:text-[#f3f3f3]">
-                <h1>Easy : {count[1].count}</h1>
-                <h3>Medium : {count[2].count} </h3>
-                <h4>Hard : {count[3].count} </h4>
+                <div className="flex gap-2"><div>Easy  : </div><CountUp end={count[1].count} /></div>
+                <div className="flex gap-2"><div>Medium  : </div><CountUp end={count[2].count} /></div>
+                <div className="flex gap-2"><div>Hard  : </div><CountUp end={count[3].count} /></div>
               </div>
             </div>
             <div className="flex h-[100px] w-[100px]">
@@ -142,10 +144,10 @@ export const CodeChefCard = () => {
                   <h1>CodeChef</h1>
                 </div>
               </Link>
-
+  
               <div className="px-2 text-[#333] dark:text-[#f3f3f3]">
-                <h1>Top Rating : {ccUserDetails.highestRating}</h1>
-                <h3>Rank : {ccUserDetails.globalRank}</h3>
+                <div>Top Rating : <CountUp end={ccUserDetails.highestRating}/></div>
+                <h3>Rank : <CountUp end={ccUserDetails.globalRank}/></h3>
                 <h4>Stars : {ccUserDetails.stars}</h4>
               </div>
             </div>
@@ -247,18 +249,19 @@ export const CodeforcesCard = () => {
                 </div>
 
               </Link>
+              
               <div className="px-2 text-[#333] dark:text-[#f3f3f3]">
                 <h1>
                   Rating :{" "}
                   {cfProfile[0].hasOwnProperty("rating")
-                    ? cfProfile[0].rating
-                    : ""}
+                    ? <CountUp end={cfProfile[0].rating}/>
+                    : 0}
                 </h1>
                 <h3>
                   Rank :{" "}
-                  {cfProfile[0].hasOwnProperty("rank") ? cfProfile[0].rank : ""}
+                  {cfProfile[0].hasOwnProperty("rank") ? cfProfile[0].rank : "Newbie"}
                 </h3>
-                <h4>FriendCount : {cfProfile[0].friendOfCount}</h4>
+                <h4>FriendCount : <CountUp end={cfProfile[0].friendOfCount}/></h4>
               </div>
             </div>
             <div className="flex h-[100px] w-[100px]">
