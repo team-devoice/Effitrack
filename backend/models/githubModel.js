@@ -3,7 +3,11 @@ const {Schema,model} = mongoose;
 
 
 const githubSchema = new Schema({
-
+    effitrack_username:{
+        type:String,
+        unique:true,
+        required:true,
+    },
     github_username:{type:String,required:true},
     followers: {type:Number,default:0},
     following: {type:Number,default:0},

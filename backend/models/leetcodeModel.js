@@ -3,7 +3,12 @@ const {Schema,model} = mongoose;
 
 
 const leetcodeSchema = new Schema({
-    username:{
+    effitrack_username:{
+        type:String,
+        unique:true,
+        required:true,
+    },
+    leetcode_username:{
         type:String,
         unique:true,
         required:true,
@@ -16,7 +21,7 @@ const leetcodeSchema = new Schema({
     // rating
     CurrentRating:{type:Number,default:0}, 
     attendedContestCount:{type: Number, default:0},
-    total_percent: {type: Number, default:0},
+    topPercentage: {type: Number, default:0},
     globalRanking:Number,
     // contest:[{title:String,rank:Number,rating:Number}], we can decide this later
     badges: [{sortName: String, icon: String}]

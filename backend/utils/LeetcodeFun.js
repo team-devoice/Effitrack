@@ -1,4 +1,4 @@
-const getLeetcodeBadges = async(UserName) => {
+const getLCBadges = async(UserName) => {
   const url = "https://leetcode.com/graphql";
   const query = `
     {
@@ -146,5 +146,5 @@ const getLeetRating = async (username) =>{
   
 
 module.exports = {
-    getLeetCount , getLeetRating, getLeetcodeBadges
+    getLeetCount , getLeetRating, getLCBadges
 }

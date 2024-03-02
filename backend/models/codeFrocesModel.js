@@ -1,14 +1,38 @@
 const {Schema,model} = require('mongoose');
 
 const codefroceSchema = new Schema({
-    username:{
+    effitrack_username:{
         type:String,
         required:true,
         unique:true,
     },
+    cf_username:{
+        type:String,
+        required:true,
+    },
+    current_rating: {
+        type: Number,
+        default: 0,
+    },
+    friendOfCount:{
+        type: Number,
+        default: 0,
+    },
     contribution:{
         type:Number,
         default:0,
+    },
+    current_rank : {
+        type: String,
+        default: "newbie",
+    },
+    maxRating: {
+        type: Number,
+        default: 0,
+    },
+    maxRank: {
+        type: String,
+        default: "newbie",
     },
     contest: {
         type: [
