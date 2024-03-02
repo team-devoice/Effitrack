@@ -8,16 +8,17 @@ const leetcodeSchema = new Schema({
         unique:true,
         required:true,
     },
+    // count
     TotalCount:{type:Number,default:0},
     Easy:{type:Number,default:0},
     Medium:{type:Number,default:0},
     Hard:{type:Number,default:0},
-    CurrentRating:{type:Number,default:0},
-    total_contest:{type:Number,default:0},  
+    // rating
+    CurrentRating:{type:Number,default:0}, 
     attendedContestCount:{type: Number, default:0},
     total_percent: {type: Number, default:0},
-    contest:[{title:String,rank:Number,rating:Number}],
-    globalRating:Number,
+    globalRanking:Number,
+    // contest:[{title:String,rank:Number,rating:Number}], we can decide this later
     badges: [{sortName: String, icon: String}]
 })
 
