@@ -9,6 +9,7 @@ import { BiSolidChevronRightCircle } from "react-icons/bi";
 import {TypeAnimation} from 'react-type-animation';
 
 const PublicStats = () =>{
+    // eslint-disable-next-line no-unused-vars
     const {id} = useParams();
     const navigate = useNavigate();
     const [effiUsername,setEffiUsername] = useState(undefined);
@@ -40,6 +41,7 @@ const PublicStats = () =>{
                     });
 
                 
+                    // eslint-disable-next-line no-unused-vars
                     const lcresponse = await axiosInstance.post(
                         `${process.env.REACT_APP_BASE_URL}/user/`,{username:effiUsername}
                     );
@@ -58,17 +60,12 @@ const PublicStats = () =>{
                 <div className=" text-center flex flex-col gap-y-7 justify-center items-center mx-auto ">
                     <div className="py-3 flex flex-col gap-y-4">
                         <div className="flex flex-row gap-x-4 justify-center items-center">
-                            {/* <img src={
-                                "https://i.ibb.co/0YBRzmJ/temp-logo.jpg"} className="w-[3rem] h-[3rem] rounded-full"></img> */}
                                 <h1 className="sm:text-4xl text-2xl font-bold">
-      <span className="text-purple-700">
-        <TypeAnimation
-          sequence={['Explore your friends growth !']}
-        />
-      </span>
-    </h1>
+                                    <span className="text-purple-700">
+                                      <TypeAnimation sequence={['Explore your friends growth !']}/>
+                                    </span>
+                                </h1>
                         </div>
-                        
                         <p className="sm:text-xl text-lg font-medium"><span className="text-gray-600 dark:text-gray-400">EffiTrack helps you to view your friends profile ! </span>🚀</p>
                     </div>
                     <div className="flex flex-row gap-x-3 justify-center relative items-center">
@@ -81,7 +78,7 @@ const PublicStats = () =>{
                         placeholder="Enter effitrack Username" 
                         onKeyPress={handleKeyPress} 
                         />
-                        <button onClick={()=>submitButton()} className="arrow-forward-button absolute right-3.5 top-3">
+                        <button onClick={()=>submitButton()} className="arrow-forward-button absolute right-3 top-3">
                             {/* <span className="material-icons-sharp translate-y-1 font-extrabold font-2xl">arrow_forward</span> */}
                             <BiSolidChevronRightCircle className="w-[2rem] h-[2rem] text-purple-500" />
                         </button>
