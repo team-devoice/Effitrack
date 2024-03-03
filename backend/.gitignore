@@ -24,3 +24,5 @@ npm install highcharts highcharts-react-official
 
 npm install cors
 npm install body-parser
+
+package-lock.json

@@ -46,7 +46,15 @@ const checkUsername = async(username) =>{
     }
 }
 
+const getGitHubProfile = async(username) =>{
+    url = `https://api.github.com/users/${username}`
+    const response = await fetch(url,{
+        method: 'GET',
+    })
+    const data =await response.json();
+    return data;
+}
 
 module.exports = {
-    getGithubRepo,getCalender,checkUsername
+    getGithubRepo,getCalender,checkUsername, getGitHubProfile
 }

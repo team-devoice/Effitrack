@@ -2,16 +2,20 @@ const mongoose = require('mongoose');
 const {Schema,model} = mongoose;
 
 const codechefSchema  = new Schema({
-    username:{
+    effitrack_username:{
         type:String,
         required:true,
         unique:true,
     },
-    platform:{type:String, default:null},
+    cc_username:{
+        type:String,
+        required:true,
+        unique:true,
+    },
     currentRating:{type:Number,default:null},
-    hightestRating:{type:Number,default:null},
-    globalRating:{type:Number,default:null},
-    countryRank:{type:String,default:null},
+    highestRating:{type:Number,default:0},
+    globalRank:{type:Number,default:null},
+    countryRank:{type: Number,default:0},
     stars:{type:String,default:null},
 })
 

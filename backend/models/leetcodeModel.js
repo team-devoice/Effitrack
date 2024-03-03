@@ -3,19 +3,28 @@ const {Schema,model} = mongoose;
 
 
 const leetcodeSchema = new Schema({
-    username:{
+    effitrack_username:{
         type:String,
         unique:true,
         required:true,
     },
+    leetcode_username:{
+        type:String,
+        unique:true,
+        required:true,
+    },
+    // count
     TotalCount:{type:Number,default:0},
     Easy:{type:Number,default:0},
     Medium:{type:Number,default:0},
     Hard:{type:Number,default:0},
-    CurrentRating:{type:Number,default:0},
-    total_contest:{type:Number,default:0},  
-    contest:[{title:String,rank:Number,rating:Number}],
-    globalRating:Number,
+    // rating
+    CurrentRating:{type:Number,default:0}, 
+    attendedContestCount:{type: Number, default:0},
+    topPercentage: {type: Number, default:0},
+    globalRanking:Number,
+    // contest:[{title:String,rank:Number,rating:Number}], we can decide this later
+    badges: [{sortName: String, icon: String}]
 })
 
 
