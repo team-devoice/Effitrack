@@ -58,17 +58,12 @@ const PublicStats = () =>{
                 <div className=" text-center flex flex-col gap-y-7 justify-center items-center mx-auto ">
                     <div className="py-3 flex flex-col gap-y-4">
                         <div className="flex flex-row gap-x-4 justify-center items-center">
-                            {/* <img src={
-                                "https://i.ibb.co/0YBRzmJ/temp-logo.jpg"} className="w-[3rem] h-[3rem] rounded-full"></img> */}
                                 <h1 className="sm:text-4xl text-2xl font-bold">
-      <span className="text-purple-700">
-        <TypeAnimation
-          sequence={['Explore your friends growth !']}
-        />
-      </span>
-    </h1>
+                                    <span className="text-purple-700">
+                                      <TypeAnimation sequence={['Explore your friends growth !']}/>
+                                    </span>
+                                </h1>
                         </div>
-                        
                         <p className="sm:text-xl text-lg font-medium"><span className="text-gray-600 dark:text-gray-400">EffiTrack helps you to view your friends profile ! </span>🚀</p>
                     </div>
                     <div className="flex flex-row gap-x-3 justify-center relative items-center">
