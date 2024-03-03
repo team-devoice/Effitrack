@@ -20,6 +20,25 @@ const initialState = {
     password:null,
   },
   upcomingContest: [],
+  addUserDetails:{
+    username:'',
+    public_username:  '', // Set required to false or remove it if it's optional
+    age: '',
+    contact:'',
+    state: '',
+    college: '',
+    startyear: '',
+    endyear:'',
+    degree: '',
+    job: '',
+    company: '',
+    experience: '',
+    cgpa: '',
+    school: '',
+    project: [],
+    programming_language: [],
+    certifications:[],
+  }
 };
 
 const userSlice = createSlice({
@@ -43,9 +62,15 @@ const userSlice = createSlice({
         upcomingContest: action.payload,
       };
     },
+    changeAddUserDetails: (state,action) =>{
+      return{
+        ...state,
+        addUserDetails:action.payload,
+      }
+    }
   },
 });
 
-export const { changeUserDetails, changeUpcomingContest , changeSignupData } = userSlice.actions;
+export const { changeUserDetails, changeUpcomingContest , changeSignupData , changeAddUserDetails} = userSlice.actions;
 
 export default userSlice.reducer;

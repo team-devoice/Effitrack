@@ -9,7 +9,8 @@ import { ccUpdateUserDetails } from "././redux/codechefSlice";
 import { updateGithubRepo, updateGithubProfile } from "././redux/githubSlice";
 import { getCookie } from "././services/servicehelp";
 import { useNavigate , Outlet , useParams} from "react-router-dom";
-import { changeUserDetails, changeUpcomingContest } from "././redux/userSlice";
+import { changeUserDetails, changeUpcomingContest , changeAddUserDetails } from "././redux/userSlice";
+
 
 const tokenName = process.env.REACT_APP_JWT_NAME;
 
@@ -35,6 +36,7 @@ function App() {
     codeforcesData();
     codechefData();
     githubData();
+    getAddUserDetails();
   }, []);
 
   const checkAuth = async () => {
@@ -245,6 +247,8 @@ function App() {
     }
   };
 
+
+
   const codechefData = async () => {
     const authToken = await getCookie(tokenName);
     if (!authToken) {
@@ -355,6 +359,45 @@ function App() {
     }
   };
 
+  const getAddUserDetails = async () => {
+    const authToken = await getCookie(tokenName);
+    if (!authToken) {
+      navigate("/login");
+    }
+
+    try {
+      const axiosInstance = axios.create({
+        headers: {
+          common: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        },
+      });
+      if (id !== undefined) {
+        const lcresponse = await axiosInstance.post(
+          `${process.env.REACT_APP_BASE_URL}/additional/`,
+          { username: id }
+        );
+        const data = lcresponse.data.message;
+        dispatch(ccUpdateUserDetails(data));
+      } else {
+        const lcresponse = await axiosInstance.get(
+          `${process.env.REACT_APP_BASE_URL}/additional/`
+        );
+        const data = lcresponse.data.message;
+        dispatch(changeAddUserDetails(data));
+      }
+    } catch (error) {
+      if (
+        error.response.data.error ||
+        error.response.request.status === 400 ||
+        error.response.request.status === 404 ||
+        error.response.request.status === 409
+      ) {
+        console.log(error.response.data.message);
+      }
+    }
+  };
   return (
     <>
       <div className={`${mode === true ? "dark" : ""}`}>
