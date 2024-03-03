@@ -6,6 +6,20 @@ const {generateTokens} = require("../utils/generateToken");
 const { userToken } = require("../models/userToken");
 const OTP = require("../models/otpModel")
 const emailSender = require("../utils/emailSender");
+
+const userRanking = async (req,res) =>{
+    try{
+        const doc = await userModel.find({}).limit(20);
+        if(!doc){
+            return res.status(404).json({error:true,message:"No user found"});
+        }
+        return res.status(200).json({error:false,message:doc});
+    }
+    catch(err){
+        return res.status(400).json({error:true,message:err.message})
+    }
+}
+
 const register = async (req,res) =>{
 
     try{
@@ -158,7 +172,7 @@ const checkEmailExist =async (req, res) => {
 }
 
 module.exports = {
-    register,login,getMe, logout , verifedUsername , checkUserExist , checkEmailExist
+    register,login,getMe, logout , verifedUsername , checkUserExist , checkEmailExist, userRanking
 }
 
 
