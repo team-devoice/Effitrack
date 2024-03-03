@@ -65,7 +65,7 @@ const Leftnav = (props) => {
             </Link>
           </div>
           <div className="left-nav-link">
-            <Link to={'/profile'} 
+          <Link to={'/profile'} 
             >
               <button className={`left-nav-a group ${activeButton == "page2" ? "l-nav-a-active" : ""}`}
                       onClick={() => {

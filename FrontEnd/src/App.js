@@ -360,7 +360,7 @@ function App() {
       <div className={`${mode === true ? "dark" : ""}`}>
         <div className="home_section bg-gray-400 dark:bg-[#484849] h-full lg:h-[100vh] scrollbar-hide overflow-hidden">
           <Leftnav display={display} setDisplay={setDisplay} />
-          <Outlet />
+          <Outlet/>
         </div>
       </div>
     </>
