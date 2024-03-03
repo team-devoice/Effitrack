@@ -40,6 +40,7 @@ const PublicStats = () =>{
                     });
 
                 
+                    // eslint-disable-next-line no-unused-vars
                     const lcresponse = await axiosInstance.post(
                         `${process.env.REACT_APP_BASE_URL}/user/`,{username:effiUsername}
                     );
@@ -76,7 +77,7 @@ const PublicStats = () =>{
                         placeholder="Enter effitrack Username" 
                         onKeyPress={handleKeyPress} 
                         />
-                        <button onClick={()=>submitButton()} className="arrow-forward-button absolute right-3.5 top-3">
+                        <button onClick={()=>submitButton()} className="arrow-forward-button absolute right-3 top-3">
                             {/* <span className="material-icons-sharp translate-y-1 font-extrabold font-2xl">arrow_forward</span> */}
                             <BiSolidChevronRightCircle className="w-[2rem] h-[2rem] text-purple-500" />
                         </button>
