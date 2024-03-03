@@ -18,7 +18,9 @@ import { Helmet } from "react-helmet";
 import { Validation } from "./components/LoginCred/SignupForm";
 import {persistor} from './redux/store'
 import { PersistGate } from 'redux-persist/integration/react';
+import Settings from "./components/settings/Settings";
 import TopPerformers from "./components/Dashboard/TopPerformers";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const appRouter = createBrowserRouter([
   {
@@ -42,9 +44,15 @@ const appRouter = createBrowserRouter([
         element: <DemoProfile />,
       },
       {
-        path: "top-performers",
+ 
+        path: "/top-performers",
         element: <TopPerformers/>
-      }
+      },
+       {
+        path:'/settings',
+        element:<Settings/>
+
+       }
     ],
     errorElement: <Page404 />,
   },

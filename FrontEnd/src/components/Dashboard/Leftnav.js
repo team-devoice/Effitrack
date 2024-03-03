@@ -112,7 +112,20 @@ const Leftnav = (props) => {
         </div>
       </div>
 
-      <div className="bottom"></div>
+      <div className="aside-bottom">
+        <Link to={'/settings'} 
+        >
+          <button className={`left-nav-a group ${activeButton == "page4" ? "l-nav-a-active" : ""}`}
+            onClick={() => {
+              handleButtonClick("page4")
+              dispatch(toggleLeftMobileNav(!mobileScreenNav))
+            }}
+          >
+            <span class="material-icons-sharp">settings</span>
+            <h4 className="group-hover:ml-2 slowmo">Settings</h4>
+          </button>
+        </Link>
+      </div>
     </aside>
   );
 };
