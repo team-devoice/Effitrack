@@ -92,6 +92,20 @@ const Leftnav = (props) => {
               </button>
             </Link>
           </div>
+          <div className="left-nav-link">
+            <Link to={'/top-performers'}
+            >
+              <button className={`left-nav-a group ${activeButton == "page4" ? "l-nav-a-active" : ""}`}
+                      onClick={() => {
+                        handleButtonClick("page4")
+                        dispatch(toggleLeftMobileNav(!mobileScreenNav))
+                      }}
+              >
+                {/* <span className="material-icons-sharp ">TopPerformers</span> */}
+                <h4 className="group-hover:ml-2 slowmo">TopPerformers</h4>
+              </button>
+            </Link>
+          </div>
           <div className={`sm:hidden ${!mobileScreenNav ? 'hidden' :'left-nav-link w-[80%] mx-auto'} `}>
             <Theme/>
           </div>
