@@ -9,6 +9,7 @@ import { BiSolidChevronRightCircle } from "react-icons/bi";
 import {TypeAnimation} from 'react-type-animation';
 
 const PublicStats = () =>{
+    // eslint-disable-next-line no-unused-vars
     const {id} = useParams();
     const navigate = useNavigate();
     const [effiUsername,setEffiUsername] = useState(undefined);
