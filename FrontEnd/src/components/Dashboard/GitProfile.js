@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState , useEffect } from "react";
+import CountUp from 'react-countup';
+
 const TableRow = ({ label, value }) => {
   return (
     <>
@@ -75,10 +77,10 @@ const GitProfile = ({ modify }) => {
                   <div className="bg-[#f4f5f6] text-[#333] slowmo dark:bg-[#333] shadow-xl hover:shadow cursor-default dark:text-[#f3f3f3] rounded-xl pt-3">
                     <table className="border-separate w-3/4 ml-5 ">
                       <tbody className="">
-                        <TableRow label="Followers" value={GithubProfile.followers} />
-                        <TableRow label="Following" value={GithubProfile.following} />
-                        <TableRow label="Public Repos" value={GithubProfile.public_repos} />
-                        <TableRow label="Public Gists" value={GithubProfile.public_gists} />
+                        <TableRow label="Followers" value=<CountUp end={GithubProfile.followers} ></CountUp> />
+                        <TableRow label="Following" value= <CountUp end={GithubProfile.following} /> />
+                        <TableRow label="Public Repos" value=<CountUp end={GithubProfile.public_repos} /> />
+                        <TableRow label="Public Gists" value=<CountUp end={GithubProfile.public_gists} /> />
                       </tbody>
                     </table>
                   </div>

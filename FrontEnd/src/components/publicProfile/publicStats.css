@@ -33,14 +33,14 @@
       color: transparent;
     }
 
-    .effiuser-input{
-        @apply py-4 pr-[3.5rem] pl-[3.5rem] bg-gray-100 dark:bg-[#333] duration-300 ease-in rounded-xl font-semibold border-2;
-        /* border-radius: 16px; */
-    }
-    .effiuser-input:focus{
-        @apply bg-gray-200 dark:bg-[#333] rounded-xl border-purple-500;
-      
-    }
+    .effiuser-input {
+      @apply py-4 pr-[3.5rem] pl-[3.5rem] bg-gray-100 dark:bg-[#333] duration-300 ease-in rounded-xl font-semibold border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent;
+  }
+  
+  .effiuser-input:focus {
+      @apply bg-gray-200 dark:bg-[#333] rounded-xl focus:ring-2 focus:ring-purple-500;
+  }
+  
     .arrow-forward-button{
       @apply rounded-full h-[2rem] w-[2rem] duration-300 ease-in;
     }
