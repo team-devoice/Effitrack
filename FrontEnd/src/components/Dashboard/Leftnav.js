@@ -65,7 +65,7 @@ const Leftnav = (props) => {
             </Link>
           </div>
           <div className="left-nav-link">
-          <Link to={'/profile'} 
+          {/* <Link to={'/profile'} 
             >
               <button className={`left-nav-a group ${activeButton == "page2" ? "l-nav-a-active" : ""}`}
                       onClick={() => {
@@ -76,7 +76,7 @@ const Leftnav = (props) => {
                 <span class="material-icons-sharp">account_circle</span>
                 <h4 className="group-hover:ml-2 slowmo">Profile</h4>
               </button>
-            </Link>
+            </Link> */}
           </div>
           <div className="left-nav-link">
             <Link to={'/usernameSearch'} 
@@ -101,8 +101,8 @@ const Leftnav = (props) => {
                         dispatch(toggleLeftMobileNav(!mobileScreenNav))
                       }}
               >
-                {/* <span className="material-icons-sharp ">TopPerformers</span> */}
-                <h4 className="group-hover:ml-2 slowmo">TopPerformers</h4>
+                <span class="material-icons-sharp">leaderboard</span>
+                <h4 className="group-hover:ml-2 slowmo">LeaderBoard</h4>
               </button>
             </Link>
           </div>
@@ -115,9 +115,9 @@ const Leftnav = (props) => {
       <div className="aside-bottom">
         <Link to={'/settings'} 
         >
-          <button className={`left-nav-a group ${activeButton == "page4" ? "l-nav-a-active" : ""}`}
+          <button className={`left-nav-a group ${activeButton == "page5" ? "l-nav-a-active" : ""}`}
             onClick={() => {
-              handleButtonClick("page4")
+              handleButtonClick("page5")
               dispatch(toggleLeftMobileNav(!mobileScreenNav))
             }}
           >

@@ -102,17 +102,17 @@ useEffect(() => {
     helper();
 }, []);
   return (
-    <div className="overflow-hidden lg:h-full h-[100vh] border-2">
+    <div className="overflow-hidden lg:h-full h-[100vh]">
           <div className="overflow-hidden h-full dark:bg-[#333] bg-[#e1e1e1] p-3 pb-0 ">
             <div className="overflow-y-auto w-full h-full no-scrollbar flex flex-col justify-between">
               <div>
                 <Navbar
                   className=""
-                  title={"Top Performers"}
+                  title={"Leader Board"}
                 />
-                <div className='m-2 p-2 rounded-xl bg-[#fafafa]'>
+                <div className='p-2 rounded-xl bg-[#fafafa] dark:bg-[#1c1d1c]'>
                   <div className="p-1 flex gap-4 justify-center items-center flex-col sm:flex-row">
-                      {topThree.map((user, index)=>{
+                      {topThree && topThree.map((user, index)=>{
                           return(
                               <button onClick={()=>{handleUserClick(user.username)}}>
                                 <TopThree key={index} position={index+1} username={user.username}/>
