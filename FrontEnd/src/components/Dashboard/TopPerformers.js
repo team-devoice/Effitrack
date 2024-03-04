@@ -7,6 +7,9 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate , Outlet , useParams} from "react-router-dom";
 import { getCookie } from "../../services/servicehelp";
+
+
+
 const tokenName = process.env.REACT_APP_JWT_NAME;
 
 const TopPerformers = () => {
@@ -22,16 +25,6 @@ const TopPerformers = () => {
             return;
         }
         try {
-          // const axiosInstance = axios.create({
-          // headers: {
-          //     common: {
-          //     Authorization: `Bearer ${authToken}`,
-          //     },
-          // },
-          // });
-          // const lcresponse = await axiosInstance.post(
-          //     `${process.env.REACT_APP_BASE_URL}/user/`,{username:username}
-          // );
           navigate(`/usernameSearch/${username}`)
       }
        catch (error) {
@@ -39,38 +32,6 @@ const TopPerformers = () => {
       }
         
   }
-
-//   const submitButton=async()=>{
-//     if(effiUsername===undefined){
-//         setUserNotFound(true);
-//     }else{
-      
-//         const authToken = getCookie(process.env.REACT_APP_JWT_NAME);
-//         if (!authToken) {
-//             navigate("/login");
-//         } else {
-//             try {
-//                 const axiosInstance = axios.create({
-//                 headers: {
-//                     common: {
-//                     Authorization: `Bearer ${authToken}`,
-//                     },
-//                 },
-//                 });
-
-            
-//                 const lcresponse = await axiosInstance.post(
-//                     `${process.env.REACT_APP_BASE_URL}/user/`,{username:effiUsername}
-//                 );
-//                 setUserNotFound(false);
-//                 navigate(`/usernameSearch/${effiUsername}`)
-//             }
-//              catch (error) {
-//                 setUserNotFound(true);
-//             }
-//         }
-//     }
-// } 
 
   const helper = async () => {
     try {
@@ -111,7 +72,19 @@ useEffect(() => {
                   title={"Leader Board"}
                 />
                 <div className='p-2 rounded-xl bg-[#fafafa] dark:bg-[#1c1d1c]'>
+                   <div className='w-[62rem] mx-auto py-2 flex flex-row justify-between'>
+                      <div className='flex flex-row gap-x-4'> 
+                        <SearchBar/>
+                        <DropdownList/>
+                      </div>
+                      <div className='flex items-center'>
+                        <button className=''>
+                          <span className="material-icons-sharp text-black dark:text-white">refresh</span>
+                        </button>
+                      </div>
+                    </div>
                   <div className="p-1 flex gap-4 justify-center items-center flex-col sm:flex-row">
+                     
                       {topThree && topThree.map((user, index)=>{
                           return(
                               <button onClick={()=>{handleUserClick(user.username)}}>
