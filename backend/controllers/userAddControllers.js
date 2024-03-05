@@ -39,6 +39,107 @@ const getAddUserDetails = async(req,res) =>{
     }
 }
 
+
+const getProject = async (req,res) =>{
+    const username = req.user.username
+    const additionalData = await userAddModel.findOne({username:username});
+
+    const projectData = additionalData.project;
+    if(!projectData){
+        return res.status(404).json({error:true,message:`Please update your project`})
+    }
+    return res.status(200).json({error:false,message:projectData})
+}
+
+const getCertifications = async (req,res) =>{
+    const username = req.user.username
+    const additionalData = await userAddModel.findOne({username:username});
+
+    const projectData = additionalData.certifications;
+    if(!projectData){
+        return res.status(404).json({error:true,message:`Please update your certificates`})
+    }
+    return res.status(200).json({error:false,message:projectData})
+}
+
+const getIntern = async (req,res) =>{
+    const username = req.user.username
+    const additionalData = await userAddModel.findOne({username:username});
+
+    const projectData = additionalData.intern;
+    if(!projectData){
+        return res.status(404).json({error:true,message:`Please update your interns`})
+    }
+    return res.status(200).json({error:false,message:projectData})
+}
+
+const postProject = async (req,res) =>{
+    const username = req.user.username;
+    const {proj_name,link,description,stack} = req.body;
+    const additionalData = await userAddModel.findOne({username:username});
+    if(!additionalData){
+        await userAddModel.updateOne({username:username},{$set:{project:[{proj_name,link,description,stack}]}},{upsert:true},(err,doc)=>{
+            if(err){
+                return res.status(409).json({error:true,message:err.message})
+            }
+        })
+        return res.status(200).json({error:false,message:'successfully updated project'})
+    }
+    const pre_project = additionalData.project;
+    await userAddModel.updateOne({username:username},{$set:{project:[...pre_project,{proj_name,link,description,stack}]}},{upsert:true},(err,doc)=>{
+        if(err){
+            return res.status(409).json({error:true,message:err.message})
+        }
+    })
+    return res.status(200).json({error:false,message:'successfully updated profile'})
+}
+
+
+
+
+const postCertification = async (req,res) =>{
+    const username = req.user.username;
+    const {cert_name,link,description,certification_provider} = req.body;
+    const additionalData = await userAddModel.findOne({username:username});
+    if(!additionalData){
+        await userAddModel.updateOne({username:username},{$set:{certifications:[{username,cert_name,link,description,certification_provider}]}},{upsert:true},(err,doc)=>{
+            if(err){
+                return res.status(409).json({error:true,message:err.message})
+            }
+        })
+        return res.status(200).json({error:false,message:'successfully updated certificate'})
+    }
+    const pre_certifications = additionalData.certifications;
+    await userAddModel.updateOne({username:username},{$set:{certifications:[...pre_certifications,{cert_name,link,description,certification_provider}]}},{upsert:true},(err,doc)=>{
+        if(err){
+            return res.status(409).json({error:true,message:err.message})
+        }
+    })
+    return res.status(200).json({error:false,message:'successfully updated profile'})
+}
+
+const postIntern = async (req,res) =>{
+    const username = req.user.username;
+    const {internproject,internOrganization,internRole,domains} = req.body;
+    const additionalData = await userAddModel.findOne({username:username});
+    if(!additionalData){
+        await userAddModel.updateOne({username:username},{$set:{intern:[{internproject,internOrganization,internRole,domains}]}},{upsert:true},(err,doc)=>{
+            if(err){
+                return res.status(409).json({error:true,message:err.message})
+            }
+        })
+        return res.status(200).json({error:false,message:'successfully updated intern'})
+    }
+    const pre_intern = additionalData.intern;
+    await userAddModel.updateOne({username:username},{$set:{intern:[...pre_intern,{internproject,internOrganization,internRole,domains}]}},{upsert:true},(err,doc)=>{
+        if(err){
+            return res.status(409).json({error:true,message:err.message})
+        }
+    })
+    return res.status(200).json({error:false,message:'successfully updated profile'})
+}
+
 module.exports = {
-    postPersonal , postEducation , getAddUserDetails
+
+    postPersonal , postEducation , getAddUserDetails , postProject , postCertification , postIntern , getProject , getCertifications , getIntern
 }
