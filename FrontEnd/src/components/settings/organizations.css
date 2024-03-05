@@ -4,7 +4,7 @@
 
 @layer utilities{
 
-    .personal-details , .organization-details , .username-details , .project-details{
+    .personal-details , .organization-details , .username-details , .project-details , .certification-details , .intern-details{
         @apply border-2 border-x-white border-t-white dark:border-x-[#171717] dark:border-t-[#171717] dark:border-b-[#333] relative
     }
     .settings-container{
