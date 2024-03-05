@@ -4,7 +4,7 @@ import {useSelector , useReducer} from 'react-redux'
 import collegeData from './colleges.json'
 import axios from 'axios'
 import { getCookie } from '../../services/servicehelp'
-import { useAsyncError, useNavigate } from 'react-router-dom'
+import { useAsyncError, useNavigate, useNavigation } from 'react-router-dom'
 import { changeAddUserDetails } from '../../redux/userSlice'
 
 export const InputBox = (props) =>{
@@ -23,7 +23,7 @@ export const InputBox = (props) =>{
             <>
                 <div className='platform-usernames-col'>
                     <label for={describe}>{describe}</label>
-                    <input placeholder={describe} id={describe} value={data} onChange={(e)=>resFun(e.target.value)}></input>
+                    <input placeholder={describe} id={describe} value={data} onChange={(e)=>resFun(e.target.value)} required></input>
                 </div>
             </>
         }
@@ -277,8 +277,6 @@ const EnterData = (props) =>{
         setDomain(newArray);
     }
     
-    
-
     return(
         <>
             <div className='platform-usernames-col'>
@@ -300,27 +298,179 @@ const EnterData = (props) =>{
     )
 }
 
-const AddPrject = (props) =>{
+const AddProject = (props) =>{
+    const navigate = useNavigate()
     const {project,setProject} = props;
     const [protitle, setProtitle] = useState('');
     const [proUrl,setProurl] = useState('');
     const [proDesc , setProDesc]  = useState('')
     const [domains,setDomain] = useState([]);
+
+    async function handleSubmit(e){
+        e.preventDefault();
+        try{
+            const authToken = getCookie(process.env.REACT_APP_JWT_NAME)
+            if(!authToken){
+                navigate('/login')
+            }
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/additional/projects`,{
+                proj_name:protitle,
+                link:proUrl,
+                description:proDesc,
+                stack:domains
+            },
+            {
+                headers:{
+                    common:{
+                        Authorization:`Bearer ${authToken}`
+                    }
+                }
+            })
+            setProject(0);
+        } catch(e){
+            console.log(e)
+        }
+    }
+
     return(
         <>
             <div className='project-data-col'>
                 <div className={'flex flex-col gap-y-4'}>
-                    <InputBox purpose={project} describe='Project name' data={''}/>
-                    <InputBox purpose={project} describe='Live Link' data={''}/>
-                    <InputBox purpose={project} describe='Project description' data={''}/>
+                    <InputBox purpose={project} describe='Project name' data={protitle} resFun={setProtitle}/>
+                    <InputBox purpose={project} describe='Live Link' data={proUrl} resFun={setProurl}/>
+                    <InputBox purpose={project} describe='Project description' data={proDesc} resFun={setProDesc}/>
                     <EnterData purpose={project} describe ='domain' domains={domains} setDomain={setDomain}/>
                     {
                         (project===1) ? 
                         <div className='profile-save-edit'>
-                            <button className='green-button'>
+                            <button className='green-button' onClick={handleSubmit}>
                                 Add Project
                             </button>
                             <button className='gray-button' onClick={()=>setProject(0)}>
+                                cancel
+                            </button>
+                        </div>
+                        :
+                        <></>   
+                    }
+                </div>
+            </div>
+        </>
+    )
+}
+
+const AddCert = (props) =>{
+    const navigate = useNavigate()
+    const {certification,setCertification} = props;
+    const [certtitle, setCerttitle] = useState('');
+    const [certUrl,setCerturl] = useState('');
+    const [certDesc , setCertDesc]  = useState('')
+    const [company,setCompany] = useState('');
+
+    async function handleSubmit(e){
+        e.preventDefault();
+        try{
+            const authToken = getCookie(process.env.REACT_APP_JWT_NAME)
+            if(!authToken){
+                navigate('/login')
+            }
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/additional/certificates`,{
+                cert_name:certtitle,
+                link:certUrl,
+                description:certDesc,
+                certification_provider:company
+            },
+            {
+                headers:{
+                    common:{
+                        Authorization:`Bearer ${authToken}`
+                    }
+                }
+            })
+            setCertification(0);
+        } catch(e){
+            console.log(e)
+        }
+    }
+
+
+    return(
+        <>
+            <div className='project-data-col'>
+                <div className={'flex flex-col gap-y-4'}>
+                    <InputBox purpose={certification} describe='Certification name' data={certtitle} resFun={setCerttitle}/>
+                    <InputBox purpose={certification} describe='Live Link' data={certUrl} resFun={setCerturl}/>
+                    <InputBox purpose={certification} describe='Organization' data={company} resFun={setCompany}/>
+                    <InputBox purpose={certification} describe='Descriptions' data={certDesc} resFun={setCertDesc}/>
+                
+                    {
+                        (certification===1) ? 
+                        <div className='profile-save-edit'>
+                            <button className='green-button' onClick={handleSubmit}>
+                                Add Certificate
+                            </button>
+                            <button className='gray-button' onClick={()=>setCertification(0)}>
+                                cancel
+                            </button>
+                        </div>
+                        :
+                        <></>   
+                    }
+                </div>
+            </div>
+        </>
+    )
+}
+
+const AddIntern = (props) =>{
+    const navigate = useNavigate()
+    const {intern,setIntern} = props;
+    const [internproject, setInternproject] = useState('');
+    const [internOrganization,setInternOrganization] = useState('');
+    const [internRole , setInternRole]  = useState('')
+    const [domains,setDomain] = useState([]);
+
+    async function handleSubmit(e){
+        e.preventDefault();
+        try{
+            const authToken = getCookie(process.env.REACT_APP_JWT_NAME)
+            if(!authToken){
+                navigate('/login')
+            }
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/additional/intern`,{
+                internproject,
+                internOrganization,
+                internRole,
+                domains
+            },
+            {
+                headers:{
+                    common:{
+                        Authorization:`Bearer ${authToken}`
+                    }
+                }
+            })
+            setIntern(0);
+        } catch(e){
+            console.log(e)
+        }
+    }
+
+    return(
+        <>
+            <div className='project-data-col'>
+                <div className={'flex flex-col gap-y-4'}>
+                    <InputBox purpose={intern} describe='Intern Project Name' data={internproject} resFun={setInternproject}/>
+                    <InputBox purpose={intern} describe='Company Name' data={internOrganization} resFun={setInternOrganization}/>
+                    <InputBox purpose={intern} describe='Role' data={internRole} resFun={setInternRole}/>
+                    <EnterData purpose={intern} describe ='domain' domains={domains} setDomain={setDomain}/>
+                    {
+                        (intern===1) ? 
+                        <div className='profile-save-edit'>
+                            <button className='green-button' onClick={handleSubmit}>
+                                Add Iterns
+                            </button>
+                            <button className='gray-button' onClick={()=>setIntern(0)}>
                                 cancel
                             </button>
                         </div>
@@ -360,7 +510,8 @@ const User_all = ()=>{
     const [userState,setUserstate] = useState(addUserDetails.state);
     const [userCollege,setUsercollege] = useState(addUserDetails.college);
     const [project,setProject]  = useState(0)
-    
+    const [certification,setCertification] = useState(0)
+    const [intern,setIntern] = useState(0)
     const [years, setYears] = useState([2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
         2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
         2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030,'Others'])
@@ -510,7 +661,7 @@ const User_all = ()=>{
                         :
                         <>   
                             <h4 className='text-lg text-gray-500'>Add your Projects</h4>
-                            <AddPrject project={project} setProject={setProject}/>
+                            <AddProject project={project} setProject={setProject}/>
                         </>
                     }
                 </div>
@@ -518,6 +669,66 @@ const User_all = ()=>{
                     (project === 0) ?
                     <>  
                         <button className='edit-button' onClick={()=>setProject(1)}>Add</button>
+                    </>
+                    :
+                    <></>
+                }
+                
+
+            </div>
+            <div className='certification-details'>
+                <h1 className='text-2xl font-semibold'>Certification</h1>
+              
+                <div className=''>
+                    {
+                        certification === 0 ?
+                        <>  
+                            <h4 className='text-lg text-gray-500'>Your Certifications</h4>
+                            <div className='project-data-row'>
+                                <DisplayProject/>
+                            </div>
+                        </> 
+                        :
+                        <>   
+                            <h4 className='text-lg text-gray-500'>Add your Cerfiticate</h4>
+                            <AddCert certification={certification} setCertification={setCertification}/>
+                        </>
+                    }
+                </div>
+                {
+                    (certification === 0) ?
+                    <>  
+                        <button className='edit-button' onClick={()=>setCertification(1)}>Add</button>
+                    </>
+                    :
+                    <></>
+                }
+                
+
+            </div>
+            <div className='intern-details'>
+                <h1 className='text-2xl font-semibold'>Iternships</h1>
+              
+                <div className=''>
+                    {
+                        intern === 0 ?
+                        <>  
+                            <h4 className='text-lg text-gray-500'>Your Iterns</h4>
+                            <div className='project-data-row'>
+                                <DisplayProject/>
+                            </div>
+                        </> 
+                        :
+                        <>   
+                            <h4 className='text-lg text-gray-500'>Add your Iterns</h4>
+                            <AddIntern intern={intern} setIntern={setIntern}/>
+                        </>
+                    }
+                </div>
+                {
+                    (intern === 0) ?
+                    <>  
+                        <button className='edit-button' onClick={()=>setIntern(1)}>Add</button>
                     </>
                     :
                     <></>

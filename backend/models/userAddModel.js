@@ -4,8 +4,11 @@ const userAddSchema = new mongoose.Schema({
     username: { type: String, required: true },
     public_username: { type: String, required: false }, // Set required to false or remove it if it's optional
     age: { type: String, default: '' },
+    gender:{type:String,default:''},
+    language:{type:String,default:''},
     contact: { type: String, default: '' },
     state: { type: String, default: '' },
+    user_state: { type: String, default: ''},
     college: { type: String, default: '' },
     startyear: { type: String, default: '' },
     endyear: { type: String, default: '' },
