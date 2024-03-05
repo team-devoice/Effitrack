@@ -21,6 +21,13 @@ const userAddSchema = new mongoose.Schema({
                 proj_name: { type: String, default: '' },
                 link: { type: String, default: '' },
                 description: { type: String, default: '' },
+                stack:{type:[
+                    {
+                        tech_name:{type:String,default:''}
+                    }
+                    ],
+                    default:[]
+                }
             }
         ],
         default: [],
@@ -39,11 +46,38 @@ const userAddSchema = new mongoose.Schema({
                 cert_name: { type: String, default: '' },
                 link: { type: String, default: '' },
                 description: { type: String, default: '' },
+                certification_provider:{type: String, default: ''}
             }
         ],
-        default: [],
+        default: [
+            {
+                cert_name: '',
+                link: '',
+                description: '',
+                certification_provider:''
+            }
+        ],
     },
-});
+    role:{
+        type:[
+            {
+                role_type:String,
+            }
+        ],
+        default:[]
+    },
+    intern:{
+        type:[
+            {
+                intern_providers:{type:String,default:''},
+                certification_link:{type:String,default:''},
+                intern_description:{type:String,default:''},
+                intern_domain:{type:String,default:''}
+            }
+        ],
+        default:[]
+    }
+}); 
 
 const userAddModel = mongoose.model('userAdd', userAddSchema);
 

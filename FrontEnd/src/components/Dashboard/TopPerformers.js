@@ -33,6 +33,98 @@ const TopPerformers = () => {
         
   }
 
+  const handleRefresh = async () => {
+    const authToken = getCookie(process.env.REACT_APP_JWT_NAME);
+    try{
+      if (!authToken) {
+        navigate("/login");
+        return; // Exit function early if no authToken
+      }
+      console.log(authToken)
+      const lc_response = await axios.post(`${process.env.REACT_APP_BASE_URL}/leetcode/LeetcodeData`,{}, {
+        headers: {
+            common: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        },
+      });
+      console.log(lc_response)
+      const gh_response = await
+      axios.post(`${process.env.REACT_APP_BASE_URL}/github/setGithubData`,{}, {
+        headers: {
+            common: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        },
+      });
+      console.log(gh_response)
+      const cf_data = await axios.post(`${process.env.REACT_APP_BASE_URL}/codeforces/cfData`,{}, {
+        headers: {
+            common: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        },
+      });
+      console.log(cf_data)
+      const cc_data = await axios.post(`${process.env.REACT_APP_BASE_URL}/codechef/ccData`,{}, {
+        headers: {
+            common: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        },
+      });
+      console.log(cc_data)
+      const lc_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/leetcode/LeetcodeData`, {
+        headers: {
+          common: {
+              Authorization: `Bearer ${authToken}`,
+          },
+        },
+      })
+      const lcRating = lc_got_data.data.message.CurrentRating;
+      const cf_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/codeforces/cfData`, {
+      headers: {
+          common: {
+              Authorization: `Bearer ${authToken}`,
+          },
+      },
+      });
+      const cf_rating = cf_got_data.data.message.maxRating;
+      const cc_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/codechef/ccData`, {
+        headers: {
+            common: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        },
+      });
+      const cc_rating = cc_got_data.data.message.highestRating;
+      const effiscore = (lcRating + cf_rating + cc_rating)/3;
+      let effirank = "";
+      if(effiscore >= 500 && effiscore < 1000){
+        effirank = "Novice" ;
+      }
+      else if(effiscore >= 1200 && effiscore < 1400){
+        effirank = "Journeyman";
+      }
+      else if(effiscore >= 1400 && effiscore < 1600){
+        effirank = "Expert";
+      }
+      else if(effiscore >= 1600 && effiscore < 1800){
+        effirank = "Master";
+      }
+      else if(effiscore >= 1800 && effiscore < 2000){
+        effirank = "Grandmaster";
+      }
+      else if(effiscore >= 2000){
+        effirank = "Legend";
+      }
+      console.log(effiscore,  effirank)
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
   const helper = async () => {
     try {
         const authToken = getCookie(tokenName);
@@ -41,7 +133,7 @@ const TopPerformers = () => {
             return; // Exit function early if no authToken
         }
         
-        const response = await axios.get('http://localhost:5000/api/user/ranking', {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/ranking`, {
             headers: {
                 common: {
                     Authorization: `Bearer ${authToken}`,
@@ -78,7 +170,7 @@ useEffect(() => {
                         <DropdownList/>
                       </div>
                       <div className='flex items-center'>
-                        <button className=''>
+                        <button className='' onClick={()=>{handleRefresh()}}>
                           <span className="material-icons-sharp text-black dark:text-white">refresh</span>
                         </button>
                       </div>

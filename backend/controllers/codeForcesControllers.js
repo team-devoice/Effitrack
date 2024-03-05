@@ -25,7 +25,7 @@ const setCfData = async (req, res) => {
 
         const data = {
             effitrack_username,
-            cf_username,
+            cf_username : username,
             current_rating,
             friendOfCount,
             contribution,
@@ -35,7 +35,7 @@ const setCfData = async (req, res) => {
             contest
         }
 
-        await codeforceModel.updateOne({cf_username: req.user.cf_username},data,{upsert:true},(err,doc)=>{
+        await codeforceModel.updateOne({cf_username: req.user.cf_username},{$set: data},{upsert:true},(err,doc)=>{
             if(err){
                 return res.status(500).json({error:true,message:err.message})
             }

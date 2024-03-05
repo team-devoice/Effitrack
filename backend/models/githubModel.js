@@ -20,7 +20,7 @@ const githubSchema = new Schema({
                 url:String,
                 desc:String,
                 ano_url: String //dont remove 
-            }
+            },
         ],
         default:[]
     },
