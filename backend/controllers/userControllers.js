@@ -7,6 +7,10 @@ const { userToken } = require("../models/userToken");
 const OTP = require("../models/otpModel")
 const emailSender = require("../utils/emailSender");
 
+const userRankingWithFilter = async () =>{
+    
+}
+
 const userRanking = async (req,res) =>{
     try{
         const doc = await userModel.find({}).limit(20);

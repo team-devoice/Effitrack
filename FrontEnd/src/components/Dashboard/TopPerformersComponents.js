@@ -49,10 +49,10 @@ const SearchBar = () => {
     );
   };
 
-  const DropdownList = () =>{
+  const DropdownList = (props) =>{
     return(
       <div className="">
-        <select className='bg-white shadow-md dark:bg-[#333] dark:text-white h-full rounded-md px-1'>
+        <select className='bg-white shadow-md dark:bg-[#333] dark:text-white h-full rounded-md px-1' onChange={(e)=>{props.setFilterValue(e.target.value)}}>
             <option value={"Leetcode"} className='p-2'>Leetcode</option>
             <option value={"Codechef"} className='p-2'>Codechef</option>
             <option value={"Codeforces"} className='p-2'>Codeforces</option>

@@ -15,8 +15,17 @@ const tokenName = process.env.REACT_APP_JWT_NAME;
 const TopPerformers = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-    // const [searchType, setSearchType] = useState();
+    const [filterValue, setFilterValue] = useState('');
   const [topThree, setTopThree] = useState([]);
+  const [leetcodeRating, setLeetcodeRating] = useState(0);
+  const [codeChefRating, setcodeChefRating] = useState(0);
+  const [codeForcesRating, setcodeForcesRating] = useState(0);
+  const [effiscore, setEffiscore] = useState(0);
+  const [effirank, setEffirank] = useState('');
+
+  useEffect(()=>{
+    console.log('modified',effiscore)
+  },[effiscore])
 
   const handleUserClick = async(username) =>{
     const authToken = getCookie(process.env.REACT_APP_JWT_NAME);
@@ -41,84 +50,111 @@ const TopPerformers = () => {
         return; // Exit function early if no authToken
       }
       console.log(authToken)
-      const lc_response = await axios.post(`${process.env.REACT_APP_BASE_URL}/leetcode/LeetcodeData`,{}, {
-        headers: {
-            common: {
-                Authorization: `Bearer ${authToken}`,
-            },
-        },
-      });
-      console.log(lc_response)
-      const gh_response = await
-      axios.post(`${process.env.REACT_APP_BASE_URL}/github/setGithubData`,{}, {
-        headers: {
-            common: {
-                Authorization: `Bearer ${authToken}`,
-            },
-        },
-      });
-      console.log(gh_response)
-      const cf_data = await axios.post(`${process.env.REACT_APP_BASE_URL}/codeforces/cfData`,{}, {
-        headers: {
-            common: {
-                Authorization: `Bearer ${authToken}`,
-            },
-        },
-      });
-      console.log(cf_data)
-      const cc_data = await axios.post(`${process.env.REACT_APP_BASE_URL}/codechef/ccData`,{}, {
-        headers: {
-            common: {
-                Authorization: `Bearer ${authToken}`,
-            },
-        },
-      });
-      console.log(cc_data)
-      const lc_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/leetcode/LeetcodeData`, {
-        headers: {
-          common: {
-              Authorization: `Bearer ${authToken}`,
+      try{
+        const lc_response = await axios.post(`${process.env.REACT_APP_BASE_URL}/leetcode/LeetcodeData`,{}, {
+          headers: {
+              common: {
+                  Authorization: `Bearer ${authToken}`,
+              },
           },
-        },
-      })
-      const lcRating = lc_got_data.data.message.CurrentRating;
-      const cf_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/codeforces/cfData`, {
-      headers: {
-          common: {
-              Authorization: `Bearer ${authToken}`,
+        });
+        console.log(lc_response)
+      }
+      catch(err){
+        console.log(err.message)
+      }
+
+      try{
+        const gh_response = await
+        axios.post(`${process.env.REACT_APP_BASE_URL}/github/setGithubData`,{}, {
+          headers: {
+              common: {
+                  Authorization: `Bearer ${authToken}`,
+              },
           },
-      },
-      });
-      const cf_rating = cf_got_data.data.message.maxRating;
-      const cc_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/codechef/ccData`, {
-        headers: {
+        });
+        console.log(gh_response)
+      }
+      catch(err){
+        console.log(err.message)
+      }
+
+      try{
+        const cf_data = await axios.post(`${process.env.REACT_APP_BASE_URL}/codeforces/cfData`,{}, {
+          headers: {
+              common: {
+                  Authorization: `Bearer ${authToken}`,
+              },
+          },
+        });
+        console.log(cf_data)
+      }
+      catch(err){
+        console.log(err.message)
+      }
+      try{
+        const cc_data = await axios.post(`${process.env.REACT_APP_BASE_URL}/codechef/ccData`,{}, {
+          headers: {
+              common: {
+                  Authorization: `Bearer ${authToken}`,
+              },
+          },
+        });
+        console.log(cc_data)
+      }
+      catch(err){
+        console.log(err.message)
+      }
+
+      try{
+        const lc_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/leetcode/LeetcodeData`, {
+          headers: {
             common: {
                 Authorization: `Bearer ${authToken}`,
             },
-        },
-      });
-      const cc_rating = cc_got_data.data.message.highestRating;
-      const effiscore = (lcRating + cf_rating + cc_rating)/3;
-      let effirank = "";
-      if(effiscore >= 500 && effiscore < 1000){
-        effirank = "Novice" ;
+          },
+        })
+        console.log('lc data',lc_got_data.data.message.CurrentRating)
+        setLeetcodeRating(lc_got_data.data.message.CurrentRating);
+        if(leetcodeRating !== 0 ){
+          setEffiscore(effiscore+ leetcodeRating)
+        }
       }
-      else if(effiscore >= 1200 && effiscore < 1400){
-        effirank = "Journeyman";
+      catch(err){
+        console.log(err.message);
       }
-      else if(effiscore >= 1400 && effiscore < 1600){
-        effirank = "Expert";
+      try{
+        const cf_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/codeforces/cfData`, {
+          headers: {
+              common: {
+                  Authorization: `Bearer ${authToken}`,
+              },
+          },
+          });
+          setcodeForcesRating(cf_got_data.data.message.maxRating);
+          if(codeForcesRating !== 0){
+            setEffiscore(effiscore+ codeForcesRating)
+          }
       }
-      else if(effiscore >= 1600 && effiscore < 1800){
-        effirank = "Master";
+      catch(err){
+        console.log(err.message)
       }
-      else if(effiscore >= 1800 && effiscore < 2000){
-        effirank = "Grandmaster";
+      try{
+        const cc_got_data = await axios.get(`${process.env.REACT_APP_BASE_URL}/codechef/ccData`, {
+          headers: {
+              common: {
+                  Authorization: `Bearer ${authToken}`,
+              },
+          },
+        });
+        setcodeChefRating(cc_got_data.data.message.highestRating);
+        if(codeChefRating !== 0){
+          setEffiscore(effiscore+ codeChefRating)
+        }
       }
-      else if(effiscore >= 2000){
-        effirank = "Legend";
+      catch(err){
+        console.log(err);
       }
-      console.log(effiscore,  effirank)
     }
     catch(err){
       console.log(err);
@@ -151,6 +187,37 @@ const TopPerformers = () => {
     }
 };
 
+
+const handleFilter = async(filter) =>{
+  console.log(filter)
+  const authToken = getCookie(process.env.REACT_APP_JWT_NAME);
+        if (!authToken) {
+            navigate("/login");
+            return;
+        }
+  try{
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/ranking`, {filter}, {
+      headers:{
+        common:{
+          Authorization: `Bearer ${authToken}`
+        }
+      }
+    })
+  }
+  catch(err){
+    console.log(err.message)
+  }
+  const gh_response = await
+      axios.post(`${process.env.REACT_APP_BASE_URL}/github/setGithubData`,{}, {
+        headers: {
+            common: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        },
+      });
+  
+}
+
 useEffect(() => {
     helper();
 }, []);
@@ -167,7 +234,8 @@ useEffect(() => {
                    <div className='w-[62rem] mx-auto py-2 flex flex-row justify-between'>
                       <div className='flex flex-row gap-x-4'> 
                         <SearchBar/>
-                        <DropdownList/>
+                        <DropdownList setFilterValue = {setFilterValue}/>
+                        <button className='flex justify-center items-center dark:bg-[f3f3f3] p-2 dark:text-white rounded-md shadow-md' onClick={()=>{handleFilter(filterValue)}}>Apply</button>
                       </div>
                       <div className='flex items-center'>
                         <button className='' onClick={()=>{handleRefresh()}}>

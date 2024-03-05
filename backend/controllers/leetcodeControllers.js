@@ -91,7 +91,7 @@ const setLeetcodeData = async (req, res) => {
             globalRanking,
             badges
         }
-        await leetcodeModel.updateOne({leetcode_username:username},data,{upsert:true},(err,doc)=>{
+        await leetcodeModel.updateOne({leetcode_username:username},{$set : data},{upsert:true},(err,doc)=>{
             if(err){
                 return res.status(500).json({error:true, message:err.message})
             }
