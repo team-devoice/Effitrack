@@ -10,7 +10,7 @@ const postPersonal = async (req,res) =>{
             console.log(err);
         }
     })
-    
+
     return res.status(200).json({error:false,message:'successfully updated profile'})
 }   
 
