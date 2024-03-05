@@ -255,6 +255,95 @@ const DegreeofStudy = (props) =>{
     )
 }
 
+const EnterData = (props) =>{
+    const {purpose,describe,data,domains,setDomain} = props;
+    const [inputValue, setInputValue] = useState('');
+
+    function handleInputChange(e){
+        setInputValue(e.target.value)
+    }
+
+    function handleAdd(e){
+        if(e.key === 'Enter' && inputValue.trim()){
+            setDomain([...domains, inputValue]); // Add input using spread syntax
+            setInputValue(''); 
+        }
+    }
+
+    function handleDelete(index){
+        const newArray = domains.filter((domain,i)=>{
+            return i !== index
+        })
+        setDomain(newArray);
+    }
+    
+    
+
+    return(
+        <>
+            <div className='platform-usernames-col'>
+                <label for={describe}>{describe}</label>
+                <input id='domainenter' type='text' onChange={handleInputChange} value={inputValue} placeholder='enter your domains' onKeyDown={handleAdd}></input>
+                <div className='flex flex-row gap-x-4 flex-wrap'>
+                    {domains.map((item, index) => (
+                        <div className='px-4 py-2 rounded-xl bg-[#fafafa] flex flex-row gap-x-2 items-center'>   
+                            <button key={index} className='' >{item}</button>
+                            <button className='' onClick={()=>handleDelete(index)}><span class="material-icons-sharp">cancel</span></button>
+                        </div>
+                        
+
+                    ))}
+                </div>
+            </div>
+           
+        </> 
+    )
+}
+
+const AddPrject = (props) =>{
+    const {project,setProject} = props;
+    const [protitle, setProtitle] = useState('');
+    const [proUrl,setProurl] = useState('');
+    const [proDesc , setProDesc]  = useState('')
+    const [domains,setDomain] = useState([]);
+    return(
+        <>
+            <div className='project-data-col'>
+                <div className={'flex flex-col gap-y-4'}>
+                    <InputBox purpose={project} describe='Project name' data={''}/>
+                    <InputBox purpose={project} describe='Live Link' data={''}/>
+                    <InputBox purpose={project} describe='Project description' data={''}/>
+                    <EnterData purpose={project} describe ='domain' domains={domains} setDomain={setDomain}/>
+                    {
+                        (project===1) ? 
+                        <div className='profile-save-edit'>
+                            <button className='green-button'>
+                                Add Project
+                            </button>
+                            <button className='gray-button' onClick={()=>setProject(0)}>
+                                cancel
+                            </button>
+                        </div>
+                        :
+                        <></>   
+                    }
+                </div>
+            </div>
+        </>
+    )
+}
+
+const DisplayProject = () =>{
+    return(
+        <>
+            <div className='project-data-col'>
+                
+            </div>
+        </>
+    )
+}
+
+
 const User_all = ()=>{
     const navigate = useNavigate()
     const [personal,setPersonal] = useState(0);
@@ -270,6 +359,8 @@ const User_all = ()=>{
     const [endyear,setEndyear] = useState(addUserDetails.endyear);
     const [userState,setUserstate] = useState(addUserDetails.state);
     const [userCollege,setUsercollege] = useState(addUserDetails.college);
+    const [project,setProject]  = useState(0)
+    
     const [years, setYears] = useState([2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
         2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
         2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030,'Others'])
@@ -397,6 +488,36 @@ const User_all = ()=>{
                     (education === 0) ?
                     <>  
                         <button className='edit-button' onClick={()=>setEducation(1)}>Edit</button>
+                    </>
+                    :
+                    <></>
+                }
+                
+
+            </div>
+            <div className='project-details'>
+                <h1 className='text-2xl font-semibold'>Projects</h1>
+              
+                <div className=''>
+                    {
+                        project === 0 ?
+                        <>  
+                            <h4 className='text-lg text-gray-500'>Your Projects</h4>
+                            <div className='project-data-row'>
+                                <DisplayProject/>
+                            </div>
+                        </> 
+                        :
+                        <>   
+                            <h4 className='text-lg text-gray-500'>Add your Projects</h4>
+                            <AddPrject project={project} setProject={setProject}/>
+                        </>
+                    }
+                </div>
+                {
+                    (project === 0) ?
+                    <>  
+                        <button className='edit-button' onClick={()=>setProject(1)}>Add</button>
                     </>
                     :
                     <></>
