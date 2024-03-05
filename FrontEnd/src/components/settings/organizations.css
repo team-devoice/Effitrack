@@ -4,7 +4,7 @@
 
 @layer utilities{
 
-    .personal-details , .organization-details , .username-details{
+    .personal-details , .organization-details , .username-details , .project-details{
         @apply border-2 border-x-white border-t-white dark:border-x-[#171717] dark:border-t-[#171717] dark:border-b-[#333] relative
     }
     .settings-container{
@@ -55,5 +55,11 @@
     }
     .gray-button{
         @apply bg-gray-100 dark:bg-[#333]
+    }
+    .project-data-row{
+        @apply flex flex-col gap-y-4
+    }
+    .project-data-col{
+        @apply p-4
     }
 }
