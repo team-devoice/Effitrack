@@ -15,6 +15,9 @@ const userAddSchema = new mongoose.Schema({
     experience: { type: String, default: '' },
     cgpa: { type: String, default: '' },
     school: { type: String, default: '' },
+    rank:{type:String,default: ''},
+    batch:{type:String,default: ''},
+    batchUrl:{type:String,default: ''},
     effiscore:{type:Number,default:0},
     project: {
         type: [
