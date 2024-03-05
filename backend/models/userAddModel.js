@@ -22,13 +22,8 @@ const userAddSchema = new mongoose.Schema({
                 proj_name: { type: String, default: '' },
                 link: { type: String, default: '' },
                 description: { type: String, default: '' },
-                stack:{type:[
-                    {
-                        tech_name:{type:String,default:''}
-                    }
-                    ],
-                    default:[]
-                }
+                stack:{type:[], default:[]}
+                
             }
         ],
         default: [],
@@ -70,10 +65,10 @@ const userAddSchema = new mongoose.Schema({
     intern:{
         type:[
             {
-                intern_providers:{type:String,default:''},
-                certification_link:{type:String,default:''},
-                intern_description:{type:String,default:''},
-                intern_domain:{type:String,default:''}
+                internproject:{type:String,default:''},
+                internOrganization:{type:String,default:''},
+                internRole:{type:String,default:''},
+                domains:{type:[],default:[]},
             }
         ],
         default:[]
