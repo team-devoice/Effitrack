@@ -5,7 +5,7 @@ const postPersonal = async (req,res) =>{
     const username = req.user.username;
     const {age,contact,gender,role} = req.body;
     const email = req.user.email;
-    const newData = userAddModel.updateOne({username:username},{$set:{username,age,contact,role,gender}},{upsert:true},(err,doc)=>{
+    const newData =await userAddModel.updateOne({username:username},{$set:{username,age,contact,role,gender}},{upsert:true},(err,doc)=>{
         if(err){
             console.log(err);
         }

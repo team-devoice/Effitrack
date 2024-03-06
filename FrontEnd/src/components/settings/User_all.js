@@ -210,7 +210,6 @@ const YearofStudy = (props) =>{
 
 const DegreeofStudy = (props) =>{
     const {purpose,describe,degrees,setUserdegree,userdegree} = props;
-    console.log(userdegree)
     return(
         <>
         {
@@ -488,10 +487,10 @@ const AddCert = (props) =>{
 
 const DisplayProject = () =>{
 
-    const userDetails = useSelector((store)=>store.userDetails);
-    const {userDetials} = userDetails;
-    const {addUserDetails} = userDetails
-    console.log(addUserDetails)
+    // const userDetails = useSelector((store)=>store.userDetails);
+    // const {userDetials} = userDetails;
+    // const {addUserDetails} = userDetails
+    // console.log(addUserDetails)
     return(
         <>
             <div className='project-data-col'>
@@ -602,7 +601,7 @@ const User_all = ()=>{
                     {
                         (personal === 1)?
                             <div className='profile-save-edit'>
-                                <button className='green-button' onClick={changePersonal}>
+                                <button className='green-button' onClick={(e)=>changePersonal(e)}>
                                     save
                                 </button>
                                 <button className='gray-button' onClick={()=>setPersonal(0)}>
@@ -627,7 +626,7 @@ const User_all = ()=>{
             <div className='organization-details'>
                 <h1 className='text-2xl font-semibold'>Organization</h1>
                 <h4 className='text-lg text-gray-500'>Add your organization profile details</h4>
-                <form onSubmit={changeEducation}>
+                <form onSubmit={(e)=>changeEducation(e)}>
                     <div className='platform-usernames-row'>
                         <AllStates stateall={stateall} setAllstate={setAllstate} userState={userState} purpose={education} setUserstate={setUserstate} setUsercollege={setUsercollege}/>
                         <AllCollege colleges = {colleges} setColleges = {setColleges} userCollege={userCollege} purpose={education} setUsercollege={setUsercollege}/>
