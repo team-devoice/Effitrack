@@ -255,7 +255,7 @@ const DegreeofStudy = (props) =>{
     )
 }
 
-const EnterData = (props) =>{
+export const EnterData = (props) =>{
     const {purpose,describe,data,domains,setDomain} = props;
     const [inputValue, setInputValue] = useState('');
 

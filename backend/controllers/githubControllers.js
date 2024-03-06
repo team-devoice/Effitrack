@@ -4,9 +4,10 @@ const { githubModel } = require('../models/githubModel');
 
 const setGithubData = async (req, res) => {
     const username = req.user.github;
-    if(username === '' || username === 'unknown' || username === undefined) 
+    if(username === '' || username === 'unknown' || username === undefined || username == null) 
         res.status(404).json({error: true, message: 'user dont have github repo'})
     try{
+        const effitrack_username = req.user.username;
         const repo  = await  getGithubRepo(username); 
         const github_profile = await getGitHubProfile(username);
         const github_username = github_profile.login;
@@ -15,15 +16,16 @@ const setGithubData = async (req, res) => {
         const public_repos = github_profile.public_repos;
         const public_gists = github_profile.public_gists;
         const data = {
-            effitrack_username: req.user.username,
-            github_username: github_username,
-            followers: followers,
-            following: following,
-            public_repos: public_repos,
-            public_gists: public_gists,
-            repo: repo
+            effitrack_username,
+            github_username: username,
+            followers,
+            following,
+            public_repos,
+            public_gists,
+            repo
         }
-        await githubModel.updateOne({github_username: github_username}, { $set: data},{upsert:true},(err,doc)=>{
+        console.log(data);
+        await githubModel.updateOne({github_username: username}, { $set: data},{upsert:true},(err,doc)=>{
             if(err){
                 console.log(err);
             }

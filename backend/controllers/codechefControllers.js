@@ -1,14 +1,10 @@
 const { codechefModel } = require('../models/codechefModel');
 const {getChefData} = require('../utils/CodeChefFun');
 
-const setCodeChefData = async (req,res) =>{
-    try{
-        const username = req.user.codechef;
-        const response = await getChefData(username);
-        if(response.error || username === "unknown"){
-           return res.status(404).json({error:true,message:"username not found"});
-        }
-        const effitrack_username = req.user.username;
+const setCodeChefDataHelper = async(req) =>{
+    const username = req.user.codechef;
+    const effitrack_username = req.user.username;
+    const response = await getChefData(username);
         const {currentRating,highestRating,globalRank,countryRank,stars} = response.message;
         const codechefData = {
             effitrack_username,
@@ -19,6 +15,16 @@ const setCodeChefData = async (req,res) =>{
             countryRank,
             stars
         }
+    return codechefData;
+}
+
+const setCodeChefData = async (req,res) =>{
+    try{
+        const username = req.user.codechef;
+        if(username === "unknown"){
+           return res.status(404).json({error:true,message:"username not found"});
+        }
+        const codechefData = setCodeChefDataHelper(req);
         await codechefModel.updateOne({cc_username:username}, { $set: codechefData},{upsert:true},(err,doc)=>{
             if(err){
                 console.log(err);
@@ -82,5 +88,5 @@ const checkCfUsername =async (req,res) =>{
 
 
 module.exports = {
-    getCodeChefDetails, checkCfUsername, setCodeChefData, getCodeChefData
+    getCodeChefDetails, checkCfUsername, setCodeChefData, getCodeChefData, setCodeChefDataHelper
 }
