@@ -3,14 +3,13 @@ const userAddModel = require('../models/userAddModel')
 
 const postPersonal = async (req,res) =>{
     const username = req.user.username;
-    const {age,contact} = req.body;
+    const {age,contact,gender,role} = req.body;
     const email = req.user.email;
-    await userAddModel.updateOne({username:username},{$set:{username,age,contact}},{upsert:true},(err,doc)=>{
+    const newData = userAddModel.updateOne({username:username},{$set:{username,age,contact,role,gender}},{upsert:true},(err,doc)=>{
         if(err){
             console.log(err);
         }
     })
-
     return res.status(200).json({error:false,message:'successfully updated profile'})
 }   
 

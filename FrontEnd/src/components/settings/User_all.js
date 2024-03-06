@@ -1,6 +1,6 @@
 import './organizations.css'
 import {useEffect, useState} from 'react'
-import {useSelector , useReducer} from 'react-redux'
+import {useSelector , useReducer, useDispatch} from 'react-redux'
 import collegeData from './colleges.json'
 import axios from 'axios'
 import { getCookie } from '../../services/servicehelp'
@@ -283,7 +283,7 @@ const EnterData = (props) =>{
                 <label for={describe}>{describe}</label>
                 <input id='domainenter' type='text' onChange={handleInputChange} value={inputValue} placeholder='enter your domains' onKeyDown={handleAdd}></input>
                 <div className='flex flex-row gap-x-4 flex-wrap'>
-                    {domains.map((item, index) => (
+                    {domains && domains.map((item, index) => (
                         <div className='px-4 py-2 rounded-xl bg-[#fafafa] flex flex-row gap-x-2 items-center'>   
                             <button key={index} className='' >{item}</button>
                             <button className='' onClick={()=>handleDelete(index)}><span class="material-icons-sharp">cancel</span></button>
@@ -326,6 +326,7 @@ const AddProject = (props) =>{
                     }
                 }
             })
+
             setProject(0);
         } catch(e){
             console.log(e)
@@ -366,7 +367,7 @@ const AddCert = (props) =>{
     const [certUrl,setCerturl] = useState('');
     const [certDesc , setCertDesc]  = useState('')
     const [company,setCompany] = useState('');
-
+    const dispatch = useDispatch()
     async function handleSubmit(e){
         e.preventDefault();
         try{
@@ -387,7 +388,9 @@ const AddCert = (props) =>{
                     }
                 }
             })
+            
             setCertification(0);
+
         } catch(e){
             console.log(e)
         }
@@ -422,68 +425,73 @@ const AddCert = (props) =>{
     )
 }
 
-const AddIntern = (props) =>{
-    const navigate = useNavigate()
-    const {intern,setIntern} = props;
-    const [internproject, setInternproject] = useState('');
-    const [internOrganization,setInternOrganization] = useState('');
-    const [internRole , setInternRole]  = useState('')
-    const [domains,setDomain] = useState([]);
+    const AddIntern = (props) =>{
+        const navigate = useNavigate()
+        const {intern,setIntern} = props;
+        const [internproject, setInternproject] = useState('');
+        const [internOrganization,setInternOrganization] = useState('');
+        const [internRole , setInternRole]  = useState('')
+        const [domains,setDomain] = useState([]);
 
-    async function handleSubmit(e){
-        e.preventDefault();
-        try{
-            const authToken = getCookie(process.env.REACT_APP_JWT_NAME)
-            if(!authToken){
-                navigate('/login')
-            }
-            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/additional/intern`,{
-                internproject,
-                internOrganization,
-                internRole,
-                domains
-            },
-            {
-                headers:{
-                    common:{
-                        Authorization:`Bearer ${authToken}`
-                    }
+        async function handleSubmit(e){
+            e.preventDefault();
+            try{
+                const authToken = getCookie(process.env.REACT_APP_JWT_NAME)
+                if(!authToken){
+                    navigate('/login')
                 }
-            })
-            setIntern(0);
-        } catch(e){
-            console.log(e)
+                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/additional/intern`,{
+                    internproject,
+                    internOrganization,
+                    internRole,
+                    domains
+                },
+                {
+                    headers:{
+                        common:{
+                            Authorization:`Bearer ${authToken}`
+                        }
+                    }
+                })
+                setIntern(0);
+            } catch(e){
+                console.log(e)
+            }
         }
+
+        return(
+            <>
+                <div className='project-data-col'>
+                    <div className={'flex flex-col gap-y-4'}>
+                        <InputBox purpose={intern} describe='Intern Project Name' data={internproject} resFun={setInternproject}/>
+                        <InputBox purpose={intern} describe='Company Name' data={internOrganization} resFun={setInternOrganization}/>
+                        <InputBox purpose={intern} describe='Role' data={internRole} resFun={setInternRole}/>
+                        <EnterData purpose={intern} describe ='domain' domains={domains} setDomain={setDomain}/>
+                        {
+                            (intern===1) ? 
+                            <div className='profile-save-edit'>
+                                <button className='green-button' onClick={handleSubmit}>
+                                    Add Iterns
+                                </button>
+                                <button className='gray-button' onClick={()=>setIntern(0)}>
+                                    cancel
+                                </button>
+                            </div>
+                            :
+                            <></>   
+                        }
+                    </div>
+                </div>
+            </>
+        )
     }
 
-    return(
-        <>
-            <div className='project-data-col'>
-                <div className={'flex flex-col gap-y-4'}>
-                    <InputBox purpose={intern} describe='Intern Project Name' data={internproject} resFun={setInternproject}/>
-                    <InputBox purpose={intern} describe='Company Name' data={internOrganization} resFun={setInternOrganization}/>
-                    <InputBox purpose={intern} describe='Role' data={internRole} resFun={setInternRole}/>
-                    <EnterData purpose={intern} describe ='domain' domains={domains} setDomain={setDomain}/>
-                    {
-                        (intern===1) ? 
-                        <div className='profile-save-edit'>
-                            <button className='green-button' onClick={handleSubmit}>
-                                Add Iterns
-                            </button>
-                            <button className='gray-button' onClick={()=>setIntern(0)}>
-                                cancel
-                            </button>
-                        </div>
-                        :
-                        <></>   
-                    }
-                </div>
-            </div>
-        </>
-    )
-}
-
 const DisplayProject = () =>{
+
+    const userDetails = useSelector((store)=>store.userDetails);
+    const {userDetials} = userDetails;
+    const {addUserDetails} = userDetails
+    console.log(addUserDetails)
     return(
         <>
             <div className='project-data-col'>
@@ -505,10 +513,12 @@ const User_all = ()=>{
     const [colleges,setColleges] = useState(addUserDetails.college);
     const [age,setAge] = useState(addUserDetails.age);
     const [contact,setContact] = useState(addUserDetails.contact);
+    const [role,setRole] = useState(addUserDetails.role);
     const [startyear,setStartyear] = useState(addUserDetails.startyear);
     const [endyear,setEndyear] = useState(addUserDetails.endyear);
     const [userState,setUserstate] = useState(addUserDetails.state);
     const [userCollege,setUsercollege] = useState(addUserDetails.college);
+    const [gender,setGender] = useState(addUserDetails.gender)  
     const [project,setProject]  = useState(0)
     const [certification,setCertification] = useState(0)
     const [intern,setIntern] = useState(0)
@@ -541,9 +551,10 @@ const User_all = ()=>{
                 },
             })
             const response = await axiosInstance.post(`${process.env.REACT_APP_BASE_URL}/additional/personal`,
-                {age,contact }
+                {age,contact,role,gender}
             )
-            changeAddUserDetails(response.data)
+            // changeAddUserDetails(response.data.new)
+            // setRole([])
             setPersonal(0);
         } catch(e){
             console.log(e.response)
@@ -564,9 +575,9 @@ const User_all = ()=>{
                     },
                 },
             })
-            // console.log("startyear",startyear,"endyear",endyear,"state",userState,'college',userCollege,'degree',userdegree)
             const response = await axiosInstance.post(`${process.env.REACT_APP_BASE_URL}/additional/education`,
             { startyear,endyear,state:userState,college:userCollege,degree:userdegree})
+            changeAddUserDetails(response.data)
             setEducation(0);
         } catch(e){
             console.log(e.response)
@@ -579,17 +590,19 @@ const User_all = ()=>{
             <div className='personal-details'>
                 <h1 className='text-2xl font-semibold'>Profile</h1>
                 <h4 className='text-lg text-gray-500 dark:text-gray-400'>Add your personal profile details</h4>
-                <form onSubmit={changePersonal}>
+                <div >
                     <div className='platform-usernames-row'>
                         <InputBox purpose={personal} describe='username' data={userDetials.username}/>
                         <InputBox purpose={personal} setPurpose={setPersonal} describe='age' data={age} resFun={setAge}/>
                         <InputBox purpose={personal} describe={'email'} data={userDetials.email}/>
-                        <InputBox purpose={personal} setPurpose={setPersonal}  describe='contact' data={contact} resFun={setContact}/>
+                        <InputBox purpose={personal} setPurpose={setPersonal}  describe='Contact' data={contact} resFun={setContact}/>
+                        <EnterData describe='Dev role' domains={role} setDomain={setRole}/>
+                        <InputBox purpose={personal} setPurpose={setPersonal}  describe='Gender' data={gender} resFun={setGender}/>
                     </div>
                     {
                         (personal === 1)?
                             <div className='profile-save-edit'>
-                                <button className='green-button'>
+                                <button className='green-button' onClick={changePersonal}>
                                     save
                                 </button>
                                 <button className='gray-button' onClick={()=>setPersonal(0)}>
@@ -600,7 +613,7 @@ const User_all = ()=>{
                         <></>
                     }
                      
-                </form>
+                </div>
                 {
                     (personal === 0) ?  
                     <button className='edit-button'

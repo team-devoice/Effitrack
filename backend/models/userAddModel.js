@@ -61,11 +61,7 @@ const userAddSchema = new mongoose.Schema({
         ],
     },
     role:{
-        type:[
-            {
-                role_type:String,
-            }
-        ],
+        type:[],
         default:[]
     },
     intern:{

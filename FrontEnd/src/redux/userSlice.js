@@ -24,6 +24,8 @@ const initialState = {
     username:'',
     public_username:  '', // Set required to false or remove it if it's optional
     age: '',
+    gender:'',
+    language:'',
     contact:'',
     state: '',
     college: '',
@@ -35,9 +37,15 @@ const initialState = {
     experience: '',
     cgpa: '',
     school: '',
+    rank: '',
+    batch:'',
+    batchUrl:'',
+    effiscore:0,
+    role:[],
     project: [],
     programming_language: [],
     certifications:[],
+    intern:[],
   }
 };
 
