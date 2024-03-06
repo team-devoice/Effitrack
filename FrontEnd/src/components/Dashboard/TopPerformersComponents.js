@@ -27,24 +27,47 @@ const SearchBarInput = tw.input`
   sm:text-sm
 `;
 
-const SearchBar = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-  
-    const handleSearchInput = (event) => {
-      setSearchQuery(event.target.value);
-    };
-  
+const SearchBar = (props) => {
+    const {filterrole,setFilterRole} = props;
+    const [inputValue,setInputValue] = useState('')
+    
+    function handleAdd(e){
+      if(e.key === 'Enter' && inputValue.trim()){
+        setFilterRole([...filterrole, inputValue]); 
+        console.log(filterrole)// Add input using spread syntax
+        setInputValue(''); 
+      }
+  }
+
+  function handleDelete(index){
+      const newArray = filterrole.filter((domain,i)=>{
+          return i !== index
+      })
+      setFilterRole(newArray);
+  }
+
     return (
       <SearchBarContainer className='flex h-10 justify-center items-center p-2 dark:bg-[#333] shadow-md'>
         <span className="material-icons-sharp dark:text-white">search</span>
         <SearchBarInput
-          type="text"
+          type="text" 
           name="search"
           placeholder="Search..."
-          value={searchQuery}
-          onChange={handleSearchInput}
+          value={inputValue}
+          onChange={(event)=>{setInputValue(event.target.value)}}
           className=' bg-[#fafafa] dark:text-white dark:bg-[#333]'
+          onKeyDown={handleAdd}
         />
+          <div className='flex flex-row gap-x-4 flex-wrap'>
+                    {filterrole && filterrole.map((item, index) => (
+                        <div className='px-4 py-2 rounded-xl bg-[#fafafa] flex flex-row gap-x-2 items-center'>   
+                            <button key={index} className='' >{item}</button>
+                            <button className='' onClick={()=>handleDelete(index)}><span class="material-icons-sharp">cancel</span></button>
+                        </div>
+                        
+
+                    ))}
+          </div>
       </SearchBarContainer>
     );
   };
@@ -75,9 +98,6 @@ const TopThree = (props) => {
               <div className='text-xl font-semibold mt-4'>
                 {props.username}
               </div>
-              <div className='text-md'>
-                muruga
-              </div>
               <div className=' bg-[#34E4B5] dark:bg-[#1c1d1c] m-4 p-2 rounded-lg'>
                 badge name
               </div>
@@ -88,19 +108,19 @@ const TopThree = (props) => {
               <div>
                 <img src="https://i.ibb.co/CJmPYDz/image.png" alt="lt_logo" border="0" className='h-5 w-5' /> 
               </div>
-              <div>123</div>
+              <div>--</div>
             </div>
             <div className='flex gap-3'>
               <div>
                 <img src="https://i.ibb.co/WgX9tJf/image.png" alt="cc_logo" border="0" className='h-5 w-5 rounded-full'/>
               </div>
-              <div>123</div>
+              <div>--</div>
             </div>
             <div className='flex gap-3'>
               <div>
                 <img src="https://i.ibb.co/8Df4ZJZ/image.png" alt="cf_logo" border="0" className='h-5 w-5' />
               </div>
-              <div>123</div>
+              <div>--</div>
             </div>
           </div>
         </div>

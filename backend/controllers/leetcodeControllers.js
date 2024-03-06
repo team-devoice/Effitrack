@@ -58,10 +58,10 @@ const checkLcUsername = async (req,res) =>{
     }
 }
 
-const setLeetcodeData = async (req, res) => {
+//just helper function check the funtion written next to it
+const setLeetcodeDataHelper = async (req, res) => {
     const username = req.user.leetcode;
-    try{
-        const count_response = await getLeetCount(username)
+    const count_response = await getLeetCount(username)
         if(count_response.message.length === 0){
             return res.status(500).json({error:true, message:"the user didnt solve any problem yet"})
         }
@@ -91,6 +91,13 @@ const setLeetcodeData = async (req, res) => {
             globalRanking,
             badges
         }
+    return data;
+}
+
+const setLeetcodeData = async (req, res) => {
+    const username = req.user.leetcode;
+    try{
+        const data = await setLeetcodeDataHelper(req, res);
         await leetcodeModel.updateOne({leetcode_username:username},{$set : data},{upsert:true},(err,doc)=>{
             if(err){
                 return res.status(500).json({error:true, message:err.message})
@@ -146,5 +153,5 @@ const  getLeetcodeBatch = async (req,res) =>{
 
 
 module.exports = {
-    getLcCount,getLcRating,checkLcUsername , getLeetcodeBatch, setLeetcodeData, getLeetcodeData
+    getLcCount,getLcRating,checkLcUsername , getLeetcodeBatch, setLeetcodeData, getLeetcodeData, setLeetcodeDataHelper
 }

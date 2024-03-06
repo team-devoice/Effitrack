@@ -6,21 +6,103 @@ const {generateTokens} = require("../utils/generateToken");
 const { userToken } = require("../models/userToken");
 const OTP = require("../models/otpModel")
 const emailSender = require("../utils/emailSender");
+const userAddModel = require("../models/userAddModel");
+const { setLeetcodeDataHelper } = require("./leetcodeControllers");
+const { setCfDataHelper } = require("./codeForcesControllers");
+const { setCodeChefDataHelper } = require("./codechefControllers");
 
-const userRankingWithFilter = async () =>{
-    
-}
-
-const userRanking = async (req,res) =>{
+const getUserByFilter = async(req, res) =>{
+    const filterrole = req.body.filterrole;
     try{
-        const doc = await userModel.find({}).limit(20);
-        if(!doc){
-            return res.status(404).json({error:true,message:"No user found"});
-        }
-        return res.status(200).json({error:false,message:doc});
+
     }
     catch(err){
-        return res.status(400).json({error:true,message:err.message})
+        res.status(400).json({error:true, message:err.message})
+    }
+}
+
+const getTheePlatformRating = async (req) =>{
+    try{
+        const leetCodeData = await setLeetcodeDataHelper(req);
+        const codeforcesData = await setCfDataHelper(req);
+        const codeChefData = await setCodeChefDataHelper(req);
+        const lcr = leetCodeData.CurrentRating;
+        const cfr = codeforcesData.maxRating;
+        const ccr = codeChefData.highestRating;
+        const effiscore = (lcr+cfr+ccr)/3
+        return effiscore;
+    }
+    catch(err){
+        return err;
+    }
+
+}
+
+
+const getUserByRanking = async (req, res) => {
+    try{
+        const docs = await userAddModel.find().sort({effiscore: -1}).limit(10);
+        console.log(docs)
+        res.status(200).json({error:false,message:docs});
+    }
+    catch(err){
+        res.status(400).json({error:true,message:err.message});
+    }
+}
+
+// const getUserByRanking = async (req, res) => {
+//     try {
+//         const docs = await userModel.aggregate([
+//             {
+//                 $lookup: {
+//                     from: 'useradds',
+//                     localField: 'username',
+//                     foreignField: 'username',
+//                     as: 'userAdditional'
+//                 }
+//             },
+//             {
+//                 $unwind: '$userAdditional'
+//             },
+//             {
+//                 $sort: {
+//                     'userAdditional.effiscore': -1 // Sort by effiscore descending
+//                 }
+//             },
+//             {
+//                 $project: {
+//                     _id: 0,
+//                     username: 1,
+//                     email: 1,
+//                     // Include other fields from the User schema as needed
+//                     effiscore: '$userAdditional.effiscore' // Include effiscore from userAddModel
+//                 }
+//             }
+//         ]);
+
+//         if (docs.length === 0) {
+//             return res.status(404).json({ error: true, message: "No users found" });
+//         }
+
+//         console.log(docs)
+
+//         return res.status(200).json({ error: false, message: docs });
+//     } catch (err) {
+//         return res.status(400).json({ error: true, message: err.message });
+//     }
+// }
+
+
+
+const SetUserRanking = async(req,res)=>{
+    const effiscore = await getTheePlatformRating(req);
+    try{
+        const doc = await userAddModel.updateOne({username: req.user.username}, {$set: {effiscore}}, {upsert:true});
+        const users = await await userAddModel.find().sort({effiscore: -1}).limit(10);
+        res.status(200).json({error:false, message:users})
+    }
+    catch(err){
+        res.status(406).json({error:true, message:err.message})
     }
 }
 
@@ -176,7 +258,7 @@ const checkEmailExist =async (req, res) => {
 }
 
 module.exports = {
-    register,login,getMe, logout , verifedUsername , checkUserExist , checkEmailExist, userRanking
+    register,login,getMe, logout , verifedUsername , checkUserExist , checkEmailExist, getUserByRanking, SetUserRanking, SetUserRanking, getTheePlatformRating, getUserByFilter
 }
 
 

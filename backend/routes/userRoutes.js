@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {register,login,getMe,checkUserExist,verifedUsername,checkEmailExist, userRanking, userRankingWithFilter}  = require("../controllers/userControllers");
+const {register,login,getMe,checkUserExist,verifedUsername,checkEmailExist, getUserByRanking, SetUserRanking, getTheePlatformRating, getUserByFilter}  = require("../controllers/userControllers");
 const fetchContestData = require('../controllers/futureContestController');
 const {auth} = require("../middleware/authMiddleware");
 const {authPublic} =require("../middleware/publicMiddleware");
@@ -12,7 +12,10 @@ router.route('/existUsername').post(checkUserExist);
 router.route('/existEmail').post(checkEmailExist);
 router.route('/upcoming').get(auth,fetchContestData).post(authPublic,fetchContestData);
 router.route('/verifedUsername').post(auth,verifedUsername);
-router.route('/ranking').get(auth,userRanking).post(auth,);
+router.route('/ranking').get(auth,getUserByRanking).post(auth,SetUserRanking);
+router.route('/testing').post(auth, getTheePlatformRating); // summa the eluthunen
+router.route('/filter').post(auth,getUserByFilter)
+
 
 module.exports= router;
 

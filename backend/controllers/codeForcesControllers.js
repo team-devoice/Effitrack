@@ -1,13 +1,9 @@
 const { codeforceModel } = require("../models/codeFrocesModel");
 const {getForceCount,getForceRating}  = require("../utils/CodeForceFun");
 
-const setCfData = async (req, res) => {
-    try {
-        const username = req.user.codeforces;
-        if(username === "unknown" || username === undefined || username === ""){
-            return res.status(404).json({error:true,message:"No Codeforces Username Found"})
-        }
-        const response = await getForceCount(username);
+const setCfDataHelper = async (req, res) =>{
+    const username = req.user.codeforces;
+    const response = await getForceCount(username);
 
         if(response.error){
             return res.status(404).json({error:true,message:response.message})
@@ -34,7 +30,16 @@ const setCfData = async (req, res) => {
             maxRank,
             contest
         }
+        return data;
+}
 
+const setCfData = async (req, res) => {
+    try {
+        const username = req.user.codeforces;
+        if(username === "unknown" || username === undefined || username === ""){
+            return res.status(404).json({error:true,message:"No Codeforces Username Found"})
+        }
+        const data = setCfDataHelper(req, res);
         await codeforceModel.updateOne({cf_username: req.user.cf_username},{$set: data},{upsert:true},(err,doc)=>{
             if(err){
                 return res.status(500).json({error:true,message:err.message})
@@ -104,5 +109,5 @@ const checkCfUsername = async (req,res) =>{
 }
 
 module.exports = {
-    getCFcount,getCFrating , checkCfUsername, setCfData, getCfData
+    getCFcount,getCFrating , checkCfUsername, setCfData, getCfData, setCfDataHelper
 }
