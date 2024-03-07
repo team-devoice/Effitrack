@@ -98,9 +98,26 @@ const removeFilter = async(index) => {
   setFilterArray(newArray)
 }
 
-const handleFilter = async(filter) =>{
-  console.log(filter)
-  setFilterArray([...filterArray, filter])
+const handleFilter = async(filterrole) =>{
+  try{
+    console.log("role : ",filterrole)
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/filter`,{filterrole}, {
+      headers: {
+          common: {
+              Authorization: `Bearer ${getCookie(tokenName)}`,
+          },
+      },
+  });
+  setUsers(response.data.message);
+        setTopThree(response.data.message.slice(0, 3));
+        console.log(response.data.message.slice(0, 3));
+        setUsers(response.data.message.slice(3));
+  }
+  catch(err){
+    console.log(err.message);
+  }
+  // console.log(filter)
+  // setFilterArray([...filterArray, filter])
 }
 
 useEffect(()=>{
@@ -125,7 +142,7 @@ useEffect(() => {
                         <div className='flex flex-row gap-x-4'> 
                           <SearchBar setFilterValue = {setFilterValue} filterrole={filterrole}
                           setFilterRole={setFilterRole} filterValue = {filterValue}/>
-                          <button className='flex justify-center items-center dark:bg-[f3f3f3] p-2 dark:text-white rounded-md shadow-md' onClick={()=>{handleFilter(filterValue)}}>Apply</button>
+                          <button className='flex justify-center items-center dark:bg-[f3f3f3] p-2 dark:text-white h-10 rounded-md shadow-md' onClick={()=>{handleFilter(filterrole)}}>Apply</button>
                         </div>
                         <div className='flex items-center'>
                           <button className='' onClick={()=>{handleRefresh()}}>
@@ -133,30 +150,32 @@ useEffect(() => {
                           </button>
                         </div>
                       </div>
-                      <div className='px-4 py-2 flex gap-4'>
-                        {
+                      <div className='px-4 py-2 flex flex-col gap-4'>
+                        {/* {
                           filterArray.map((filter, index)=>{
                             return(
-                              <div key={index} className=' bg-blue-200 p-2 rounded-md flex justify-center items-center'>
-                                <div>
-                                 {filter} 
-                                </div>
-                                <div>
-                                  <button className='' onClick={()=>{removeFilter(index)}}><span class="material-icons-sharp">cancel</span></button>
-                                </div>
-                              </div>
+                              <div>hello world</div>
+                              // <div key={index} className=' bg-blue-200 p-2 rounded-md flex justify-center items-center'>
+                              //   <div>
+                              //    {filter} 
+                              //   </div>
+                              //   <div>
+                              //     <button className='' onClick={()=>{removeFilter(index)}}><span class="material-icons-sharp">cancel</span></button>
+                              //   </div>
+                              // </div>
                             )
                           })
-                        }
+                        } */}
                       </div>
                     </div>
 
                   <div className="p-1 flex gap-4 justify-center items-center flex-col sm:flex-row">
                      
                       {topThree && topThree.map((user, index)=>{
+                        const es = Math.floor(user.effiscore);
                           return(
                               <button onClick={()=>{handleUserClick(user.username)}}>
-                                <TopThree key={index} position={index+1} username={user.username}/>
+                                <TopThree key={index} position={index+1} username={user.username} effiscore = {es}/>
                               </button>
                           )
                       })}

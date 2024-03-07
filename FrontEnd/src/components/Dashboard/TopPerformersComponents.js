@@ -47,28 +47,28 @@ const SearchBar = (props) => {
   }
 
     return (
-      <SearchBarContainer className='flex h-10 justify-center items-center p-2 dark:bg-[#333] shadow-md'>
-        <span className="material-icons-sharp dark:text-white">search</span>
-        <SearchBarInput
-          type="text" 
-          name="search"
-          placeholder="Search..."
-          value={inputValue}
-          onChange={(event)=>{setInputValue(event.target.value)}}
-          className=' bg-[#fafafa] dark:text-white dark:bg-[#333]'
-          onKeyDown={handleAdd}
-        />
-          <div className='flex flex-row gap-x-4 flex-wrap'>
-                    {filterrole && filterrole.map((item, index) => (
-                        <div className='px-4 py-2 rounded-xl bg-[#fafafa] flex flex-row gap-x-2 items-center'>   
-                            <button key={index} className='' >{item}</button>
-                            <button className='' onClick={()=>handleDelete(index)}><span class="material-icons-sharp">cancel</span></button>
-                        </div>
-                        
-
-                    ))}
-          </div>
-      </SearchBarContainer>
+      <div>
+        <SearchBarContainer className='flex h-10 justify-center items-center p-2 dark:bg-[#333] shadow-md'>
+          <span className="material-icons-sharp dark:text-white">search</span>
+          <SearchBarInput
+            type="text" 
+            name="search"
+            placeholder="Search..."
+            value={inputValue}
+            onChange={(event)=>{setInputValue(event.target.value)}}
+            className=' bg-[#fafafa] dark:text-white dark:bg-[#333]'
+            onKeyDown={handleAdd}
+          />
+        </SearchBarContainer>
+        <div className='flex flex-row gap-x-4 flex-wrap'>
+        {filterrole && filterrole.map((item, index) => (
+            <div className='px-4 py-2 rounded-xl bg-[#fafafa] flex flex-row gap-x-2 items-center'>   
+                <button key={index} className='' >{item}</button>
+                <button className='' onClick={()=>handleDelete(index)}><span class="material-icons-sharp">cancel</span></button>
+            </div>
+        ))}
+        </div>
+      </div>
     );
   };
 
@@ -97,6 +97,9 @@ const TopThree = (props) => {
               </div>
               <div className='text-xl font-semibold mt-4'>
                 {props.username}
+              </div>
+              <div className='text-sm font-semibold mt-4'>
+                {props.effiscore}
               </div>
               <div className=' bg-[#34E4B5] dark:bg-[#1c1d1c] m-4 p-2 rounded-lg'>
                 badge name

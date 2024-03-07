@@ -14,10 +14,18 @@ const { setCodeChefDataHelper } = require("./codechefControllers");
 const getUserByFilter = async(req, res) =>{
     const filterrole = req.body.filterrole;
     try{
-
+        if(filterrole.length === 0){
+            const docs = await userAddModel.find().sort({effiscore: -1}).limit(10);
+            console.log(docs)
+            return res.status(200).json({error:false,message:docs});
+        }
+        console.log(filterrole)
+        const doc = await userAddModel.find({role:{ $in: filterrole }});
+        console.log(doc)
+        return res.status(200).json({error:false,message:doc});
     }
     catch(err){
-        res.status(400).json({error:true, message:err.message})
+        return res.status(400).json({error:true, message:err.message})
     }
 }
 
@@ -26,11 +34,23 @@ const getTheePlatformRating = async (req) =>{
         const leetCodeData = await setLeetcodeDataHelper(req);
         const codeforcesData = await setCfDataHelper(req);
         const codeChefData = await setCodeChefDataHelper(req);
-        const lcr = leetCodeData.CurrentRating;
-        const cfr = codeforcesData.maxRating;
-        const ccr = codeChefData.highestRating;
-        const effiscore = (lcr+cfr+ccr)/3
-        return effiscore;
+        const lcr = Number(leetCodeData.CurrentRating);
+        const cfr = Number(codeforcesData.maxRating);
+        const ccr = Number(codeChefData.highestRating);
+        let effiscore = 0;
+        if (!isNaN(lcr) && lcr !== undefined && lcr !== null && lcr !== "") {
+            effiscore += lcr;
+        }
+        if (!isNaN(cfr) && cfr !== undefined && cfr !== null && cfr !== "") {
+            effiscore += cfr;
+        }
+        if (!isNaN(ccr) && ccr !== undefined && ccr !== null && ccr !== "") {
+            effiscore += ccr;
+        }
+        console.log("lcr:", lcr, "cfr:", cfr, "ccr:", ccr);
+        console.log(effiscore);
+        return Number(effiscore);
+
     }
     catch(err){
         return err;
