@@ -38,19 +38,17 @@ const getTheePlatformRating = async (req) =>{
         const cfr = Number(codeforcesData.maxRating);
         const ccr = Number(codeChefData.highestRating);
         let effiscore = 0;
-        if (!isNaN(lcr) && lcr !== undefined && lcr !== null && lcr !== "") {
+        if (lcr) {
             effiscore += lcr;
         }
-        if (!isNaN(cfr) && cfr !== undefined && cfr !== null && cfr !== "") {
+        if (cfr) {
             effiscore += cfr;
         }
-        if (!isNaN(ccr) && ccr !== undefined && ccr !== null && ccr !== "") {
+        if (ccr) {
             effiscore += ccr;
         }
         console.log("lcr:", lcr, "cfr:", cfr, "ccr:", ccr);
-        console.log(effiscore);
-        return Number(effiscore);
-
+        return Number(Math.trunc(effiscore/10));
     }
     catch(err){
         return err;
