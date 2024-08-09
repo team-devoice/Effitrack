@@ -127,7 +127,7 @@ const SetUserRanking = async(req,res)=>{
 const register = async (req,res) =>{
 
     try{
-        var {username,password,email,otp} = req.body;
+        var {username,password,email} = req.body;
         const {error} = signupbodyValidation(req.body);
         username = username.trim();
         if(error)   
@@ -146,13 +146,13 @@ const register = async (req,res) =>{
                     .json({error:true,message:"Username or Email already registered"});
         }
 
-        const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-        if (response.length === 0 || otp !== response[0].otp) {
-            return res.status(400).json({
-                error: true,
-                message: 'The OTP is not valid',
-            });
-        }
+        // const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+        // if (response.length === 0 || otp !== response[0].otp) {
+        //     return res.status(400).json({
+        //         error: true,
+        //         message: 'The OTP is not valid',
+        //     });
+        // }
 
         const salt = await bcrypt.genSalt(parseInt(process.env.SALT));
         const hashedPassword = await bcrypt.hash(password,salt);
