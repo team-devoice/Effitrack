@@ -20,15 +20,15 @@ const Mid = () => {
               <CodeforcesCard />
             </div>
             <div className="graph-git mb-2">
-              <div className="rounded-xl h-full item2 hover:shadow bg-[#fff] slowmo shadow-xl dark:bg-[#1d1d1d] dark:text-[#f3f3f3] mr-2">
+              <div className="rounded-xl h-full item2 bg-[#fff] slowmo dark:bg-[#1d1d1d] dark:text-[#f3f3f3] mr-2">
                 <GitProfile modify={github_data} />
               </div>
-              <div className="p-2 bg-white dark:bg-[#1d1d1d] rounded-xl shadow-md ">
+              <div className="p-2 bg-white dark:bg-[#1d1d1d] rounded-xl ">
                 <Chart />
               </div>
             </div>
           </div>
-          <div className="mid-right mt-1 mb-2 shadow-lg hover:shadow">
+          <div className="mid-right mt-1 mb-2">
             <Upcoming />
           </div>
         </section>

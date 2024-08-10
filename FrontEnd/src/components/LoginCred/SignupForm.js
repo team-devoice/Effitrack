@@ -63,7 +63,7 @@ export const Validation = (props) =>{
           <span className="material-icons-sharp text-white">arrow_back</span>
         </button>
       <div 
-          className="text-white min-w-[350px] flex flex-col justify-center items-center gap-y-4 p-8  bg-slate-800 border-slate-400 rounded-tr-xl shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative sm:rounded-r-xl sm:rounded-t-xl ">
+          className="text-white min-w-[350px] flex flex-col justify-center items-center gap-y-4 p-8  bg-slate-800 border-slate-400 rounded-tr-xl backdrop-filter backdrop-blur-sm bg-opacity-30 relative sm:rounded-r-xl sm:rounded-t-xl ">
         <div> 
           <h1 className="text-4xl text-white font-bold text-center ">
             Validation
@@ -172,7 +172,7 @@ const UserInfo = (props) =>{
   return(
     <>
          <div
-            className="text-white flex flex-col justify-center items-center gap-y-4 p-14 py-10 bg-slate-800 border-slate-400 rounded-tr-xl shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative sm:rounded-r-xl sm:rounded-t-xl w-full"
+            className="text-white flex flex-col justify-center items-center gap-y-4 p-14 py-10 bg-slate-800 border-slate-400 rounded-tr-xl backdrop-filter backdrop-blur-sm bg-opacity-30 relative sm:rounded-r-xl sm:rounded-t-xl w-full"
           >
             <h1 className="text-4xl text-white font-bold text-center mb-6">
               Register

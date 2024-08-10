@@ -65,7 +65,7 @@ export const LoginForm = (props) => {
     <>
       <form
         onSubmit={handleSubmit}
-        className="text-white flex flex-col justify-center items-center gap-y-4 p-14 bg-slate-800 border-slate-400 rounded-tr-xl shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative sm:rounded-r-xl sm:rounded-t-xl w-full"
+        className="text-white flex flex-col justify-center items-center gap-y-4 p-14 bg-slate-800 border-slate-400 rounded-tr-xl backdrop-filter backdrop-blur-sm bg-opacity-30 relative sm:rounded-r-xl sm:rounded-t-xl w-full"
       >
         <h1 className="text-4xl text-white font-bold text-center mb-6">
           Login

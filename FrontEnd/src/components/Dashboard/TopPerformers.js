@@ -142,7 +142,7 @@ useEffect(() => {
                         <div className='flex flex-row gap-x-4'> 
                           <SearchBar setFilterValue = {setFilterValue} filterrole={filterrole}
                           setFilterRole={setFilterRole} filterValue = {filterValue}/>
-                          <button className='flex justify-center items-center dark:bg-[f3f3f3] p-2 dark:text-white h-10 rounded-md shadow-md' onClick={()=>{handleFilter(filterrole)}}>Apply</button>
+                          <button className='flex justify-center items-center dark:bg-[f3f3f3] p-2 dark:text-white h-10 rounded-md' onClick={()=>{handleFilter(filterrole)}}>Apply</button>
                         </div>
                         <div className='flex items-center'>
                           <button className='' onClick={()=>{handleRefresh()}}>

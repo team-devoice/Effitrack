@@ -6,7 +6,6 @@ const SearchBarContainer = tw.div`
   w-full
   max-w-xs
   rounded-md
-  shadow-sm
   border-gray-300
   focus:border-indigo-500
   focus:ring-indigo-500
@@ -48,7 +47,7 @@ const SearchBar = (props) => {
 
     return (
       <div>
-        <SearchBarContainer className='flex h-10 justify-center items-center p-2 dark:bg-[#333] shadow-md'>
+        <SearchBarContainer className='flex h-10 justify-center items-center p-2 dark:bg-[#333]'>
           <span className="material-icons-sharp dark:text-white">search</span>
           <SearchBarInput
             type="text" 
@@ -75,7 +74,7 @@ const SearchBar = (props) => {
   const DropdownList = (props) =>{
     return(
       <div className="">
-        <select className='bg-white shadow-md dark:bg-[#333] dark:text-white h-full rounded-md px-1' onChange={(e)=>{props.setFilterValue(e.target.value)}}>
+        <select className='bg-white dark:bg-[#333] dark:text-white h-full rounded-md px-1' onChange={(e)=>{props.setFilterValue(e.target.value)}}>
             <option value={"Leetcode"} className='p-2'>Leetcode</option>
             <option value={"Codechef"} className='p-2'>Codechef</option>
             <option value={"Codeforces"} className='p-2'>Codeforces</option>
@@ -87,7 +86,7 @@ const SearchBar = (props) => {
 
 const TopThree = (props) => {
     return (
-        <div className='w-[20rem] h-[25rem] bg-white dark:bg-[#333] dark:text-[#f3f3f3] rounded-lg flex flex-col gap-y-4 justify-between items-stretch shadow-lg hover:shadow-sm'>
+        <div className='w-[20rem] h-[25rem] bg-white dark:bg-[#333] dark:text-[#f3f3f3] rounded-lg flex flex-col gap-y-4 justify-between items-stretch'>
           <div className='p-4 text-lg'>
             {props.position}th
           </div>
@@ -133,7 +132,7 @@ const TopThree = (props) => {
 
 const UsersList = (props) => {
   return (
-      <div className=' sm:max-w-[62rem] w-full h-[60px] bg-white dark:bg-[#333] rounded-lg flex items-center justify-between px-6 dark:text-[#f3f3f3] shadow-md hover:shadow-sm'>
+      <div className=' sm:max-w-[62rem] w-full h-[60px] bg-white dark:bg-[#333] rounded-lg flex items-center justify-between px-6 dark:text-[#f3f3f3]'>
         <div className='flex gap-2 sm:gap-8 items-center'>
           <div className='pl-2 sm:pl-4'>
             {props.position}th

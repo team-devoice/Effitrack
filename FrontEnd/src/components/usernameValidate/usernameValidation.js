@@ -195,8 +195,10 @@ const UserValid = () => {
   // }, [lcflag, ccflag, cfflag, githubFlag]);
 
   const saveUsername = async () => {
+    console.log("check");
     if ( (ccflag === 1 || ccUsername==='') && (cfflag === 1 || cfUsername === '') && (lcflag === 1 || lcUsername === '') && (githubFlag === 1 || githubUsername === '') ){
         const authToken = getCookie("jwtToken");
+        console.log("check")
         const body = {
           leetcode: lcUsername,
           codechef: ccUsername,

@@ -21,7 +21,7 @@ const Favourite = (props) => {
     <>
       {
     <a href={repoDetails.url} target="_blank" rel="noopener noreferrer">
-      <div className="repo-favourite  bg-[#f4f5f6] text-[#333] dark:bg-[#333] slowmo shadow-xl hover:shadow-none ease-in duration-300 cursor-default dark:text-[#f3f3f3] flex items-center justify-between p-4">
+      <div className="repo-favourite  bg-[#f4f5f6] text-[#333] dark:bg-[#333] slowmo hover:shadow-none ease-in duration-300 cursor-default dark:text-[#f3f3f3] flex items-center justify-between p-4">
       <div className="flex items-center">
         <img src={GitRepo} alt="github" className="mr-4" />
         <div className="flex-grow pl-4 border-l border-[#000] dark:border-[#FFF] justify-between">
@@ -63,7 +63,7 @@ const Social = (props) => {
   }
   return (
     <>
-      <Link to={url} target="_blank" rel="noopener noreferrer" className="h-[4rem] cursor-pointer social-media shadow-xl hover:shadow-none slowmo bg-[#f4f5f6] dark:bg-[#333] dark:text-white text-[#333]">
+      <Link to={url} target="_blank" rel="noopener noreferrer" className="h-[4rem] cursor-pointer social-media slowmo bg-[#f4f5f6] dark:bg-[#333] dark:text-white text-[#333]">
         <img src={logoSrc} alt={platform} className="w-[40px] h-[40px]"></img>
         <div className="social-media-inner">
           <h4 className="font-medium">{platform}</h4>
@@ -142,7 +142,7 @@ const Showcase = () => {
                   })}
               </>
             ) : (
-              <div className="h-[4rem] repo-favourite bg-[#f4f5f6] text-[#333] dark:bg-[#333] shadow-xl hover:shadow-none ease-in duration-300 cursor-default dark:text-[#f3f3f3]">
+              <div className="h-[4rem] repo-favourite bg-[#f4f5f6] text-[#333] dark:bg-[#333] hover:shadow-none ease-in duration-300 cursor-default dark:text-[#f3f3f3]">
                 {/* emtpy shimmer */}
               </div>
             )}  
@@ -177,7 +177,7 @@ const Showcase = () => {
         </div>
       </div>
       <div className={`fixed inset-0 ${(show)?'block':'hidden'} text-white h-full w-full flex justify-center items-center m-auto`}>
-        <div className="bg-[#f3f4f5] dark:bg-[#1d1d1d] m-4 p-4 rounded-lg text- dark:text-white shadow-xl ">
+        <div className="bg-[#f3f4f5] dark:bg-[#1d1d1d] m-4 p-4 rounded-lg text- dark:text-white">
           <div className="text-lg flex border-b-2 mb-2">
             <div className="p-4 text-[#000] dark:text-[#f1f1f1">
               Add Your Social Media links

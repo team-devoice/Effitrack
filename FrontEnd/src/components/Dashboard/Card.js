@@ -25,7 +25,7 @@ export const LeetcodeCard = () => {
   return (
 
       <div
-        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] shadow-xl slowmo hover:shadow`}
+        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo`}
       >
         {
           userDetials.leetcode === '' ?
@@ -123,7 +123,7 @@ export const CodeChefCard = () => {
   return (
 
       <div
-        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] shadow-xl slowmo hover:shadow`}
+        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo`}
       >
         {
           userDetials.codechef === '' ?
@@ -226,7 +226,7 @@ export const CodeforcesCard = () => {
   return (
 
     <div
-      className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo shadow-xl hover:shadow`}
+      className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo`}
     >
      
         {
