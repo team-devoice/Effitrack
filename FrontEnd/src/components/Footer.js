@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="text-xl text-[#333] font-semibold dark:text-[#f3f3f3]">
           Effitrack
         </div>
-        <div>| effitrack@gmail.com</div>
+        <div>| teamdevoice@gmail.com</div>
       </div>
       <div className="flex items-center gap-2">
         <a

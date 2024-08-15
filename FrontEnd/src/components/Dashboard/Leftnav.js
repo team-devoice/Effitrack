@@ -64,8 +64,8 @@ const Leftnav = (props) => {
               </button>
             </Link>
           </div>
-          <div className="left-nav-link">
-          {/* <Link to={'/profile'} 
+          {/* <div className="left-nav-link">
+          <Link to={'/profile'} 
             >
               <button className={`left-nav-a group ${activeButton == "page2" ? "l-nav-a-active" : ""}`}
                       onClick={() => {
@@ -76,8 +76,8 @@ const Leftnav = (props) => {
                 <span class="material-icons-sharp">account_circle</span>
                 <h4 className="group-hover:ml-2 slowmo">Profile</h4>
               </button>
-            </Link> */}
-          </div>
+            </Link>
+          </div> */}
           <div className="left-nav-link">
             <Link to={'/usernameSearch'} 
             >
