@@ -16,7 +16,7 @@
 
 @layer utilities {
   .home_section {
-    @apply grid lg:grid-cols-[15.5rem,auto] gap-4
+    @apply grid lg:grid-cols-[15.5rem,auto] 
   }
   .top{
     @apply mt-8 

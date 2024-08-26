@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import CodeChef from "../../assets/codechef.jpeg";
 import Codeforces_logo from "../../assets/codeforces.png";
@@ -14,36 +13,38 @@ const Contest = (props) => {
   return (
     <>
       <a href={`${onecontestData?.href}`} target="_blank" rel="noreferrer"
-        className="contest bg-[#f4f5f6] rounded-lg text-black
-                            flex flex-row px-3 py-3 slowmo
-                             gap-x-3 items-center next
-                             dark:bg-[#333] dark:text-[#f3f3f3] hover:shadow-none  p-2"
+        className="contest bg-[#f4f5f6] rounded-xl text-black p-[0.8rem]
+                            flex slowmo items-center h-[5rem] flex-row-reverse justify-between
+                             dark:bg-[#333] dark:text-[#f3f3f3] hover:shadow-none "
       >
         <div>
           {
             onecontestData?.resource?.name?.includes("codechef") ? 
-                (<img src={CodeChef} alt="codechef"className="w-[30px] h-[30px]"></img>)
+                (<img src={CodeChef} alt="codechef"className="w-[32px] h-[32px]"></img>)
             :
             onecontestData?.resource?.name?.includes("codeforces") ?
-            (<img src={Codeforces_logo} alt="codeforces" className="w-[30px] h-[30px] "></img>)
+            (<img src={Codeforces_logo} alt="codeforces" className="w-[32px] h-[32px] "></img>)
             : 
             onecontestData?.resource?.name?.includes("leetcode") ?
-            (<img src={Leetcode_logo} alt="leetcode" className="w-[30px] h-[30px]"></img>)
+            (<img src={Leetcode_logo} alt="leetcode" className="w-[32px] h-[32px]"></img>)
             : 
             onecontestData?.resource?.name?.includes("atcoder") ?
-            (<img src={atCoder_logo} alt="atcoder" className="w-[30px] h-[30px] "></img>)
+            (<img src={atCoder_logo} alt="atcoder" className="w-[32px] h-[32px] "></img>)
             : onecontestData?.resource?.name?.includes("geeksforgeeks") ?
-            (<img src={geekforgeeks_logo} alt="atcoder" className="w-[30px] h-[30px] "></img>)
+            (<img src={geekforgeeks_logo} alt="atcoder" className="w-[32px] h-[32px] "></img>)
             : <></>
           }
           
         </div>
-        <div className="grid p-2">
-          <div className="flex flex-col ">
-            <h1 className="font-semibold text-sm">{onecontestData.contestName}</h1>
-            <small className="font-medium">{onecontestData.contestDate} </small>
-          </div>
-        </div>
+        <div className="grid  p-2">
+  <div className="flex flex-col w-[12rem]">
+    <h1 className="font-semibold text-sm overflow-hidden truncate ">
+      {onecontestData.contestName}
+    </h1>
+    <small className="font-thin text-gray-600 dark:text-[#c0c0c0]">{onecontestData.contestDate}</small>
+  </div>
+</div>
+
       </a>
     </>
   );
@@ -68,12 +69,11 @@ const ContestFilter = (props) =>{
 
     return <>
       <div target="_blank" rel="noreferrer"
-        className="contest bg-[#f4f5f6] rounded-lg text-black
-                            flex flex-row px-3 py-3 slowmo
-                             gap-x-2 items-center next
-                             dark:bg-[#333] dark:text-[#f3f3f3] hover:shadow-none  p-2"
+        className="contest bg-[#f4f5f6] rounded-xl text-black
+                  flex px-3 py-3 slowmo items-center
+                  dark:bg-[#333] dark:text-[#f3f3f3] hover:shadow-none p-2"
       >
-        <div className="w-[2.5rem] rounded-full overflow-hidden">
+        <div className="w-[2.5rem] rounded-xl overflow-hidden">
         {
             platformNeed.includes("codechef") ? 
                 (<img src={CodeChef} alt="codechef"className="p-2"></img>)
@@ -91,8 +91,8 @@ const ContestFilter = (props) =>{
             : <></>
           }
         </div>
-        <div className="grid grid-cols-3 w-full font-sm text-lg items-center">
-          <p className="w-[80%] mx-auto col-span-2" style={paragraphStyle}>{platformNeed}</p>
+        <div className="flex p-2 justify-between w-full font-sm text-lg items-center">
+          <p className="w-[90%] mx-auto col-span-2" style={paragraphStyle}>{platformNeed}</p>
           <input
             type="checkbox"
             className="w-[1.3rem] h-[1.3rem] cursor-pointer"
@@ -154,14 +154,15 @@ const Upcoming = () => {
     contest.sort((a, b) => new Date(a.contestDate) - new Date(b.contestDate));
     SetContestDetails(contest)
   },[upcomingContest,rootSlice])
+  
   return (
     <>
       <div className="dark:bg-[#1d1d1d] bg-[#fff] px-4 text-[#333] py-4 rounded-xl h-full w-full relative">
         <div className="dark:text-white text-black grid grid-cols-2 text-center">
-            <button className={`w-[70%] mx-auto rounded-xl p-1 ${twoToggle?"contest-filter":""}`} onClick={()=>setTwoToggle(1)}>  
+            <button className={`w-[70%] mx-auto rounded-xl p-2 ${twoToggle?"contest-filter":""}`} onClick={()=>setTwoToggle(1)}>  
                   Upcoming
             </button>
-            <button className={`w-[70%] mx-auto rounded-xl p-1 ${!twoToggle?"contest-filter":""}`} onClick={()=>setTwoToggle(0)}>
+            <button className={`w-[70%] mx-auto rounded-xl p-2 ${!twoToggle?"contest-filter":""}`} onClick={()=>setTwoToggle(0)}>
                   Filter
             </button>
         </div>

@@ -75,7 +75,7 @@ const PublicStats = () =>{
                         onChange={(e) => setEffiUsername(e.target.value)} 
                         value={effiUsername} 
                         className="effiuser-input" 
-                        placeholder="Enter effitrack Username" 
+                        placeholder="Enter effitrack username" 
                         onKeyPress={handleKeyPress} 
                         />
                         <button onClick={()=>submitButton()} className="arrow-forward-button absolute right-3 top-3">
