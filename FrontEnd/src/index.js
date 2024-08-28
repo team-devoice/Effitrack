@@ -22,6 +22,8 @@ import Settings from "./components/settings/Settings";
 import TopPerformers from "./components/Dashboard/TopPerformers";
 import LoginSignupLayout from "./Layouts/LoginSignupLayout";
 import JobsLayout from "./Layouts/JobPortalLayout/ListJobs";
+import ListJobs from "./components/ListJobs/ListJobs";
+import CreateJob from "./components/CreateJob";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const appRouter = createBrowserRouter([
@@ -58,7 +60,21 @@ const appRouter = createBrowserRouter([
        {
         path: "/jobs",
         element: <JobsLayout />,
-      }
+        children:[
+           {
+              path:"/jobs",
+              element:<ListJobs/>
+           },
+           {
+              path:"/jobs/create",
+              element:<CreateJob/>
+           }
+        ]
+      },
+      // {
+      //   path: "/jobs",
+      //   element: <JobsLayout />,
+      // },
     ],
     errorElement: <Page404 />,
   },
