@@ -21,6 +21,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import Settings from "./components/settings/Settings";
 import TopPerformers from "./components/Dashboard/TopPerformers";
 import LoginSignupLayout from "./Layouts/LoginSignupLayout";
+import JobsLayout from "./Layouts/JobPortalLayout/ListJobs";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const appRouter = createBrowserRouter([
@@ -53,7 +54,11 @@ const appRouter = createBrowserRouter([
         path:'/settings',
         element:<Settings/>
 
-       }
+       },
+       {
+        path: "/jobs",
+        element: <JobsLayout />,
+      }
     ],
     errorElement: <Page404 />,
   },

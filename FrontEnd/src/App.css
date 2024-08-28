@@ -67,3 +67,14 @@ label.active {
   transform: translateY(-1.5rem) scale(0.75);
   color: #3498db; /* Set the label color when active */
 }
+
+/* // <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 100 to 900 */
+
+.noto-sans-normal {
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
