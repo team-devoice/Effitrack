@@ -106,6 +106,20 @@ const Leftnav = (props) => {
               </button>
             </Link>
           </div>
+          <div className="left-nav-link">
+            <Link to={'/jobs'}
+            >
+              <button className={`left-nav-a group ${activeButton === "page5" ? "l-nav-a-active" : ""}`}
+                      onClick={() => {
+                        handleButtonClick("page5")
+                        dispatch(toggleLeftMobileNav(!mobileScreenNav))
+                      }}
+              >
+                <span class="material-symbols-outlined">work</span>
+                <h4 className="group-hover:ml-2 slowmo">Jobs</h4>
+              </button>
+            </Link>
+          </div>
           <div className={`sm:hidden ${!mobileScreenNav ? 'hidden' :'left-nav-link w-[80%] mx-auto'} `}>
             <Theme/>
           </div>
@@ -115,9 +129,9 @@ const Leftnav = (props) => {
       <div className="aside-bottom">
         <Link to={'/settings'} 
         >
-          <button className={`left-nav-a group ${activeButton == "page5" ? "l-nav-a-active" : ""}`}
+          <button className={`left-nav-a group ${activeButton === "page6" ? "l-nav-a-active" : ""}`}
             onClick={() => {
-              handleButtonClick("page5")
+              handleButtonClick("page6")
               dispatch(toggleLeftMobileNav(!mobileScreenNav))
             }}
           >
