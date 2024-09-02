@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 // Import toastify css file
 import "react-toastify/dist/ReactToastify.css";
+import { calculateSkillMatchRate } from '../../services/helper';
 
 const JobPopUp = ({ jobdetails, skillColors, isOpen, setIsOpen }) => {
 
@@ -133,6 +134,37 @@ const JobPopUp = ({ jobdetails, skillColors, isOpen, setIsOpen }) => {
                                             })
                                         }
                                     </div>
+                                </div>
+                                {/* Skill Match Rate */}
+                                <div>
+                                    <h1>EffScore:</h1>
+                                    <div className='flex flex-wrap gap-2 mt-2'>
+                                        {
+                                            calculateSkillMatchRate(addUserDetails.role, jobdetails.skillsRequired).matchRate
+                                        }%
+                                    </div>
+                                    <div className='flex flex-wrap gap-2 mt-2'>
+                                    <div className='flex flex-row flex-wrap gap-2 mt-2'>
+                                    <h1>Missing Skills</h1>
+                                        {
+                                            calculateSkillMatchRate(addUserDetails.role, jobdetails.skillsRequired).missingSkills.map((skill, key) => {
+                                                return (
+                                                    <Tag key={key} skill={skill} skillColors={skillColors} />
+                                                );
+                                            })
+                                        }
+                                        </div>
+                                        <div className='flex flex-wrap gap-2 mt-2'>
+                                        <h1>Matching Skills</h1>
+                                            {
+                                                calculateSkillMatchRate(addUserDetails.role, jobdetails.skillsRequired).matchingSkills.map((skill, key) => {
+                                                    return (
+                                                        <Tag key={key} skill={skill} skillColors={skillColors} />
+                                                    );
+                                                })
+                                            }
+                                            </div>
+                                            </div>
                                 </div>
                                 {/* Resume */}
                                 <div className='space-y-2'>

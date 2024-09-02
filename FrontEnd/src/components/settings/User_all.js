@@ -487,14 +487,24 @@ const AddCert = (props) =>{
 
 const DisplayProject = () =>{
 
-    // const userDetails = useSelector((store)=>store.userDetails);
-    // const {userDetials} = userDetails;
-    // const {addUserDetails} = userDetails
-    // console.log(addUserDetails)
+    const userDetails = useSelector((store)=>store.userDetails);
+    const {project} = userDetails.addUserDetails; 
+    console.log(project)
     return(
         <>
             <div className='project-data-col'>
-                
+                {project && project.map((project)=>{
+                    return(
+                        <div className='project-data-row flex flex-wrap flex-col bg-gray-300 rounded-md'>
+                            <div className='project-data-col flex-row max-w-20'>
+                                <h1 className='text-xl font-semibold'>{project.proj_name}</h1>
+                                <h4 className='text-lg text-gray-500'>{project.link}</h4>
+                                <h4 className='text-lg text-gray-500'>{project.description}</h4>
+                                <h4 className='text-lg text-gray-500'>{project.stack}</h4>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
         </>
     )
