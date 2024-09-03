@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.welcome-logo{
+    @apply flex items-center gap-2 text-4xl font-bold text-center text-white top-4 left-4 z-10;
+}
+
+.left-container{
+    @apply hidden md:flex w-[40%] justify-center items-center bg-black text-white
+}
+.right-container{
+    @apply w-full md:w-[60%] flex justify-center items-center h-full
+}
+.back{
+    @apply w-[70px] py-1 border border-[#333] rounded-lg text-center
+}
+.next{
+    @apply w-[70px] py-1 bg-black text-white rounded-lg text-center
+}
+
+.container {
+  --color: #E1E1E1;
+  background-color: #F3F3F3;
+  background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+      linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+  background-size: 55px 55px;
+}
+
+@layer utilities {
+    .image-inverted {
+      filter: invert(100%);
+    }
+  }
+
+.input-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .slide-in-left {
+    animation: slideInLeft 0.5s ease-out;
+  }
+  
+  .slide-out-left {
+    animation: slideOutLeft 0.5s ease-in;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-200%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOutLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-200%);
+      opacity: 0;
+    }
+  }
+  
+  .slide-transition {
+    transition: transform 0.3s ease;
+  }
+
+  .shake {
+        animation: shake 0.5s ease-in-out;
+    }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}

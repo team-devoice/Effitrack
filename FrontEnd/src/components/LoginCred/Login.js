@@ -25,7 +25,7 @@ export const Login = ({ page , validateOTP }) => {
             <img
               src={isLogin === true ? login : signup}
               alt="login img"
-              className="min-w-[420px] z-10 shadow-md floating-element"
+              className="min-w-[420px] z-10 floating-element"
             />
           </div>
           {isLogin ? (

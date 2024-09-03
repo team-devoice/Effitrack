@@ -4,10 +4,10 @@ const initialState = {
   userDetials: {
     username: "unknown",
     email: "unknown",
-    leetcode: "unknown",
-    codeforces: "unknown",
-    codechef: "unknown",
-    github: "unknown",
+    leetcode:'',
+    codeforces: '',
+    codechef: '',
+    github: '',
     socialMedia:{
       linkedIn: undefined,
       twitter: undefined,
@@ -20,6 +20,33 @@ const initialState = {
     password:null,
   },
   upcomingContest: [],
+  addUserDetails:{
+    username:'',
+    public_username:  '', // Set required to false or remove it if it's optional
+    age: '',
+    gender:'',
+    language:'',
+    contact:'',
+    state: '',
+    college: '',
+    startyear: '',
+    endyear:'',
+    degree: '',
+    job: '',
+    company: '',
+    experience: '',
+    cgpa: '',
+    school: '',
+    rank: '',
+    batch:'',
+    batchUrl:'',
+    effiscore:0,
+    role:[],
+    project: [],
+    programming_language: [],
+    certifications:[],
+    intern:[],
+  }
 };
 
 const userSlice = createSlice({
@@ -43,9 +70,15 @@ const userSlice = createSlice({
         upcomingContest: action.payload,
       };
     },
+    changeAddUserDetails: (state,action) =>{
+      return{
+        ...state,
+        addUserDetails:action.payload,
+      }
+    }
   },
 });
 
-export const { changeUserDetails, changeUpcomingContest , changeSignupData } = userSlice.actions;
+export const { changeUserDetails, changeUpcomingContest , changeSignupData , changeAddUserDetails} = userSlice.actions;
 
 export default userSlice.reducer;

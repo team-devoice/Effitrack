@@ -4,10 +4,12 @@ import axios from "axios";
 import { getCookie } from "../../services/servicehelp";
 import Friends from '../../assets/jpg/friends-removebg.jpg';
 import Effitrack from '../../assets/temp_logo.jpeg'
-import arrow from "../../assets/jpg/next.jpg"
 import './publicStats.css'
+import { BiSolidChevronRightCircle } from "react-icons/bi";
+import {TypeAnimation} from 'react-type-animation';
 
 const PublicStats = () =>{
+    // eslint-disable-next-line no-unused-vars
     const {id} = useParams();
     const navigate = useNavigate();
     const [effiUsername,setEffiUsername] = useState(undefined);
@@ -39,6 +41,7 @@ const PublicStats = () =>{
                     });
 
                 
+                    // eslint-disable-next-line no-unused-vars
                     const lcresponse = await axiosInstance.post(
                         `${process.env.REACT_APP_BASE_URL}/user/`,{username:effiUsername}
                     );
@@ -53,16 +56,17 @@ const PublicStats = () =>{
     }   
     return(
         <>
-            <div className="publicStats-top">
-                <div className=" text-center flex flex-col gap-y-7 justify-center items-center mx-auto">
+            <div className="publicStats-top ">
+                <div className=" text-center flex flex-col gap-y-7 justify-center items-center mx-auto ">
                     <div className="py-3 flex flex-col gap-y-4">
                         <div className="flex flex-row gap-x-4 justify-center items-center">
-                            {/* <img src={
-                                "https://i.ibb.co/0YBRzmJ/temp-logo.jpg"} className="w-[3rem] h-[3rem] rounded-full"></img> */}
-                            <h1 className="sm:text-4xl text-2xl font-bold"><span className="text-purple-700">Effitrack Username</span></h1>
+                                <h1 className="sm:text-4xl text-2xl font-bold">
+                                    <span className="text-purple-700">
+                                      <TypeAnimation sequence={['Explore your friends growth !']}/>
+                                    </span>
+                                </h1>
                         </div>
-                        
-                        <p className="sm:text-xl text-lg font-medium"><span className="text-gray-400">Explore your friends growth ! </span>🚀</p>
+                        <p className="sm:text-xl text-lg font-medium"><span className="text-gray-600 dark:text-gray-400">EffiTrack helps you to view your friends profile ! </span>🚀</p>
                     </div>
                     <div className="flex flex-row gap-x-3 justify-center relative items-center">
                         <img src={Effitrack} className="w-[2rem] h-[2rem] rounded-full absolute left-3 top-3" alt="logo"></img>
@@ -71,12 +75,12 @@ const PublicStats = () =>{
                         onChange={(e) => setEffiUsername(e.target.value)} 
                         value={effiUsername} 
                         className="effiuser-input" 
-                        placeholder="Enter effitrack Username" 
+                        placeholder="Enter effitrack username" 
                         onKeyPress={handleKeyPress} 
                         />
                         <button onClick={()=>submitButton()} className="arrow-forward-button absolute right-3 top-3">
                             {/* <span className="material-icons-sharp translate-y-1 font-extrabold font-2xl">arrow_forward</span> */}
-                            <img className="" src={arrow} alt="arrow"></img>
+                            <BiSolidChevronRightCircle className="w-[2rem] h-[2rem] text-purple-500" />
                         </button>
                     </div>
                     {
@@ -91,7 +95,7 @@ const PublicStats = () =>{
                     }
                 </div>
                 <div className="md:translate-x-[-1rem] md:block hidden">
-                    <img src={Friends} className="" alt="friends"></img>
+                    <img src={Friends} className="mb-7 z-20 floating-element" alt="friends"></img>
                 </div>
             </div>
         </>

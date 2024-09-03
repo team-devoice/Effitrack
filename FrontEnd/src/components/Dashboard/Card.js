@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import Codechef_logo from "../../assets/codechef-01.png";
 import Codeforces_logo from "../../assets/codeforces.png";
 import { Link } from "react-router-dom";
+import CountUp from 'react-countup';
+
 
 
 export const LeetcodeCard = () => {
@@ -11,8 +13,8 @@ export const LeetcodeCard = () => {
   const userSlice = useSelector((store) => store.userDetails);
   const {userDetials} = userSlice;
   const { count } = leetcodeDetails;
-
   const [leetcodeUrl,setLeetcodeUrl] = useState('#');
+
 
   useEffect(()=>{
     if(userDetials.leetcode !== "unknown"){
@@ -23,70 +25,82 @@ export const LeetcodeCard = () => {
   return (
 
       <div
-        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] shadow-xl slowmo hover:shadow`}
+        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo`}
       >
-        <div className="card-details">
-          <Link  to={`${userDetials.leetcode === "unknown" ? '#' : leetcodeUrl}`} target="_blank" className={`${userDetials.leetcode === "unknown" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
-
-            <div
-              className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-x-2`}
-            >
-              <img src={LeetCode_logo} alt="leetlogo" className="h-5"></img>
-              <h1>Leetcode</h1>
+        {
+          userDetials.leetcode === '' ?
+          <>
+            <div className="">
+              <h1 className="text-2xl">Provide your Leetcode username</h1>
             </div>
-        </Link>
+          </>
+          :
+          <>  
+            <div className="card-details">
+              <Link to={`${userDetials.leetcode === "unknown" ? '#' : leetcodeUrl}`} target="_blank" className={`${userDetials.leetcode === "unknown" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 
-          <div className="px-2 text-[#333] dark:text-[#f3f3f3]">
-            <h1>Easy : {count[1].count}</h1>
-            <h3>Medium : {count[2].count} </h3>
-            <h4>Hard : {count[3].count} </h4>
-          </div>
-        </div>
-        <div className="flex h-[100px] w-[100px]">
-          <svg width={100} height={100}>
-            <g transform="rotate(-90, 50, 50)">
-              <circle
-                r="45"
-                cx="50"
-                cy="50"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="0.5rem"
-                strokeDasharray={439.8}
-                strokeDashoffset={0}
-                className="text-gray-300 w-[50%] dark:text-gray-600"
-              ></circle>
-              <circle
-                r="45"
-                cx="50"
-                cy="50"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="0.5rem"
-                strokeDasharray={439.8}
-                strokeDashoffset={440 - (440 * 400) / 2350}
-                className="text-[#2d63f2] dark:text-[#f3f3f3]"
-              ></circle>
-            </g>
-            <text
-              className="text-xl font-medium"
-              x="50%"
-              y="40%"
-              dominantBaseline="central"
-              textAnchor="middle"
-              fill="gray"
-            >
-              {count[0]?.count?.toString()?.padStart(1, "0")}
-            </text>
-            <text
-              className="text-sm font-medium"
-              x="50%"
-              y="65%"
-              dominantBaseline="central"
-              textAnchor="middle"
-              fill="gray">Solved</text>
-          </svg>
-        </div>
+                <div
+                  className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-x-2`}
+                >
+                  <img src={LeetCode_logo} alt="leetlogo" className="h-5"></img>
+                  <h1>Leetcode</h1>
+                </div>
+              </Link>
+  
+              <div className="px-2 text-[#333] dark:text-[#f3f3f3]">
+                <div className="flex gap-2"><div>Easy  : </div><CountUp end={count[1].count} /></div>
+                <div className="flex gap-2"><div>Medium  : </div><CountUp end={count[2].count} /></div>
+                <div className="flex gap-2"><div>Hard  : </div><CountUp end={count[3].count} /></div>
+              </div>
+            </div>
+            <div className="flex h-[100px] w-[100px]">
+              <svg width={100} height={100}>
+                <g transform="rotate(-90, 50, 50)">
+                  <circle
+                    r="45"
+                    cx="50"
+                    cy="50"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="0.5rem"
+                    strokeDasharray={439.8}
+                    strokeDashoffset={0}
+                    className="text-gray-300 w-[50%] dark:text-gray-600"
+                  ></circle>
+                  <circle
+                    r="45"
+                    cx="50"
+                    cy="50"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="0.5rem"
+                    strokeDasharray={439.8}
+                    strokeDashoffset={440 - (440 * 400) / 2350}
+                    className="text-[#2d63f2] dark:text-[#f3f3f3]"
+                  ></circle>
+                </g>
+                <text
+                  className="text-xl font-medium"
+                  x="50%"
+                  y="40%"
+                  dominantBaseline="central"
+                  textAnchor="middle"
+                  fill="gray"
+                >
+                  {count[0]?.count?.toString()?.padStart(1, "0")}
+                </text>
+                <text
+                  className="text-sm font-medium"
+                  x="50%"
+                  y="65%"
+                  dominantBaseline="central"
+                  textAnchor="middle"
+                  fill="gray">Solved</text>
+              </svg>
+            </div>
+          </>
+        }
+        
       </div>
 
   );
@@ -109,74 +123,87 @@ export const CodeChefCard = () => {
   return (
 
       <div
-        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] shadow-xl slowmo hover:shadow`}
+        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo`}
       >
-          <div className="card-details">
-            <Link  to={`${userDetials.codechef === "unknown" ? '#' : codechefUrl}`} target="_blank" className={`${userDetials.codechef === "unknown" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+        {
+          userDetials.codechef === '' ?
+          <>
+            <div className="">
+              <h1 className="text-2xl">Provide your CodeChef username</h1>
+            </div>
+          </>
+          :
+          <>
+            <div className="card-details">
+              <Link to={`${userDetials.codechef === "unknown" ? '#' : codechefUrl}`} target="_blank" className={`${userDetials.codechef === "unknown" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 
-              <div
-                className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-2`}
-              >
+                <div
+                  className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-2`}
+                >
                   <img src={Codechef_logo} alt="codecheflogo" className="h-5 mt-[-3px]"></img>
                   <h1>CodeChef</h1>
-              </div>
-            </Link>
-            
+                </div>
+              </Link>
+  
               <div className="px-2 text-[#333] dark:text-[#f3f3f3]">
-                <h1>Top Rating : {ccUserDetails.highestRating}</h1>
-                <h3>Rank : {ccUserDetails.globalRank}</h3>
+                <div>Top Rating : <CountUp end={ccUserDetails.highestRating}/></div>
+                <h3>Rank : <CountUp end={ccUserDetails.globalRank}/></h3>
                 <h4>Stars : {ccUserDetails.stars}</h4>
               </div>
-          </div>
-       
+            </div>
+
+
+            <div className="flex h-[100px] w-[100px]">
+              <svg width={100} height={100}>
+                <g transform="rotate(-90, 50, 50)">
+                  <circle
+                    r="45"
+                    cx="50"
+                    cy="50"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="0.5rem"
+                    strokeDasharray={439.8}
+                    strokeDashoffset={0}
+                    className="text-gray-300 w-[50%] dark:text-gray-600"
+                  ></circle>
+                  <circle
+                    r="45"
+                    cx="50"
+                    cy="50"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="0.5rem"
+                    strokeDasharray={439.8}
+                    strokeDashoffset={
+                      440 - (440 * ccUserDetails.currentRating) / 5000
+                    }
+                    className="text-[#2d63f2] dark:text-[#f3f3f3]"
+                  ></circle>
+                </g>
+                <text
+                  className="text-xl font-medium"
+                  x="50%"
+                  y="40%"
+                  dominantBaseline="central"
+                  textAnchor="middle"
+                  fill="gray"
+                >
+                  {ccUserDetails.currentRating.toString().padStart(1, "0")}
+                </text>
+                <text
+                  className="text-sm font-medium"
+                  x="50%"
+                  y="65%"
+                  dominantBaseline="central"
+                  textAnchor="middle"
+                  fill="gray">Rating</text>
+              </svg>
+            </div>
+          </>
+
+        }
           
-        <div className="flex h-[100px] w-[100px]">
-          <svg width={100} height={100}>
-            <g transform="rotate(-90, 50, 50)">
-              <circle
-                r="45"
-                cx="50"
-                cy="50"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="0.5rem"
-                strokeDasharray={439.8}
-                strokeDashoffset={0}
-                className="text-gray-300 w-[50%] dark:text-gray-600"
-              ></circle>
-              <circle
-                r="45"
-                cx="50"
-                cy="50"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="0.5rem"
-                strokeDasharray={439.8}
-                strokeDashoffset={
-                  440 - (440 * ccUserDetails.currentRating) / 5000
-                }
-                className="text-[#2d63f2] dark:text-[#f3f3f3]"
-              ></circle>
-            </g>
-            <text
-              className="text-xl font-medium"
-              x="50%"
-              y="40%"
-              dominantBaseline="central"
-              textAnchor="middle"
-              fill="gray"
-            >
-              {ccUserDetails.currentRating.toString().padStart(1, "0")}
-            </text>
-            <text
-              className="text-sm font-medium"
-              x="50%"
-              y="65%"
-              dominantBaseline="central"
-              textAnchor="middle"
-              fill="gray">Rating</text>
-          </svg>
-        </div>
       </div>
 
   );
@@ -191,89 +218,107 @@ export const CodeforcesCard = () => {
   const [codeforcesUrl,setCodeforcesUrl] = useState('#');
   
   useEffect(()=>{
-    if(userDetials.codeforces !== "unknown"){
+    if(userDetials.codeforces !== ""){
       setCodeforcesUrl(`https://codeforces.com/profile/${userDetials.codeforces}`)
     }
   },[userDetials.codeforces])
 
   return (
 
-      <div
-        className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo shadow-xl hover:shadow`}
-      >
-        <div className="card-details ">
-          <Link  to={`${userDetials.codeforces === "unknown" ? '#' : codeforcesUrl}`} target="_blank" className={`${userDetials.codeforces === "unknown" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
-
-            <div
-              className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-2`}
-            >
-              <img src={Codeforces_logo} alt="codeforceslogo" className="h-5"></img>
-              <h1>CodeForces</h1>
+    <div
+      className={`card bg-[#fff] dark:bg-[#1d1d1d] text-[#f3f3f3] slowmo`}
+    >
+     
+        {
+          userDetials.codeforces === '' ?
+          <>
+            <div>
+              <h1 className="text-2xl">Provide your Codeforces username</h1>
             </div>
-          </Link>
+          </>
+          :
+          <>
+            <div className="card-details ">
+              <Link to={`${userDetials.codeforces === "" ? '#' : codeforcesUrl}`} target="_blank" className={`${userDetials.codeforces === "" ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
 
-          <div className="px-2 text-[#333] dark:text-[#f3f3f3]">
-            <h1>
-              Rating :{" "}
-              {cfProfile[0].hasOwnProperty("rating")
-                ? cfProfile[0].rating
-                : "null"}
-            </h1>
-            <h3>
-              Rank :{" "}
-              {cfProfile[0].hasOwnProperty("rank") ? cfProfile[0].rank : "null"}
-            </h3>
-            <h4>FriendCount : {cfProfile[0].friendOfCount}</h4>
-          </div>
+                <div
+                  className={`card-details-top bg-[#253D5B] dark:bg-[#333] rounded-xl flex justify-center items-center gap-2`}
+                >
+                  <img src={Codeforces_logo} alt="codeforceslogo" className="h-5"></img>
+                  <h1>CodeForces</h1>
+                </div>
+
+              </Link>
+              
+              <div className="px-2 text-[#333] dark:text-[#f3f3f3]">
+                <h1>
+                  Rating :{" "}
+                  {cfProfile[0].hasOwnProperty("rating")
+                    ? <CountUp end={cfProfile[0].rating}/>
+                    : 0}
+                </h1>
+                <h3>
+                  Rank :{" "}
+                  {cfProfile[0].hasOwnProperty("rank") ? cfProfile[0].rank : "Newbie"}
+                </h3>
+                <h4>FriendCount : <CountUp end={cfProfile[0].friendOfCount}/></h4>
+              </div>
+            </div>
+            <div className="flex h-[100px] w-[100px]">
+              <svg width={100} height={100}>
+                <g transform="rotate(-90, 50, 50)">
+                  <circle
+                    r="45"
+                    cx="50"
+                    cy="50"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="0.5rem"
+                    strokeDasharray={439.8}
+                    strokeDashoffset={0}
+                    className="text-gray-300 w-[50%] dark:text-gray-600"
+                  ></circle>
+                  <circle
+                    r="45"
+                    cx="50"
+                    cy="50"
+                    fill="transparent"
+                    stroke="currentColor"
+                    strokeWidth="0.5rem"
+                    strokeDasharray={439.8}
+                    strokeDashoffset={440 - (440 * 400) / 3635}
+                    className="text-[#2d63f2] dark:text-[#f3f3f3]"
+                  ></circle>
+                </g>
+                <text
+                  className="text-xl font-medium"
+                  x="50%"
+                  y="40%"
+                  dominantBaseline="central"
+                  textAnchor="middle"
+                  fill="gray"
+                >
+                  {cfProfile[0].hasOwnProperty("maxRating")
+                    ? cfProfile[0].maxRating?.toString().padStart(1, "0")
+                    : "0".toString().padStart(1, "0")}
+                </text>
+                <text
+                  className="text-sm font-medium"
+                  x="50%"
+                  y="65%"
+                  dominantBaseline="central"
+                  textAnchor="middle"
+                  fill="gray">Rating</text>
+              </svg>
+            </div>
+
+          </>
+        }
+        
         </div>
-        <div className="flex h-[100px] w-[100px]">
-          <svg width={100} height={100}>
-            <g transform="rotate(-90, 50, 50)">
-              <circle
-                r="45"
-                cx="50"
-                cy="50"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="0.5rem"
-                strokeDasharray={439.8}
-                strokeDashoffset={0}
-                className="text-gray-300 w-[50%] dark:text-gray-600"
-              ></circle>
-              <circle
-                r="45"
-                cx="50"
-                cy="50"
-                fill="transparent"
-                stroke="currentColor"
-                strokeWidth="0.5rem"
-                strokeDasharray={439.8}
-                strokeDashoffset={440 - (440 * 400) / 3635}
-                className="text-[#2d63f2] dark:text-[#f3f3f3]"
-              ></circle>
-            </g>
-            <text
-              className="text-xl font-medium"
-              x="50%"
-              y="40%"
-              dominantBaseline="central"
-              textAnchor="middle"
-              fill="gray"
-            >
-              {cfProfile[0].hasOwnProperty("maxRating")
-                ? cfProfile[0].maxRating?.toString().padStart(1, "0")
-                : "0".toString().padStart(1, "0")}
-            </text>
-            <text
-              className="text-sm font-medium"
-              x="50%"
-              y="65%"
-              dominantBaseline="central"
-              textAnchor="middle"
-              fill="gray">Rating</text>
-          </svg>
-        </div>
-      </div>
+
+
+      
 
   );
 };

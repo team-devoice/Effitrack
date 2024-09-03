@@ -15,7 +15,7 @@ const EditProfile = () => {
         <Profile_edit />
       </div>
       <div className="flex w-full justify-center items-center mt-4 dark:text-white text-center">
-        <div className="lg:w-[65%] md:w-[70%] sm:w-[75%] w-[98%] p-5 shadow-2xl h-full rounded-xl">
+        <div className="lg:w-[65%] md:w-[70%] sm:w-[75%] w-[98%] p-5 h-full rounded-xl">
           <Username_edit />
           <Leetcode_edit />
           <Codeforces_edit />

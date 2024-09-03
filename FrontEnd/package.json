@@ -22,6 +22,7 @@
     "chart.js": "^4.4.0",
     "cheerio": "^1.0.0-rc.12",
     "cros": "^1.0.1",
+    "effitrack": "file:",
     "framer-motion": "^10.16.16",
     "highcharts": "^11.2.0",
     "highcharts-react-official": "^3.2.1",
@@ -30,14 +31,17 @@
     "puppeteer": "^21.5.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
+    "react-countup": "^6.5.3",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.12.0",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",
-    "redux-persist": "^6.0.0",
     "react-toastify": "^10.0.4",
+    "react-type-animation": "^3.2.0",
+    "redux-persist": "^6.0.0",
+    "tailwind-styled-components": "^2.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -77,5 +81,6 @@
     "hooks": {
       "pre-commit": "npm run format:check"
     }
-  }
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }

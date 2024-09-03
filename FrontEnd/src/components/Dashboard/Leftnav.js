@@ -23,7 +23,7 @@ const Leftnav = (props) => {
     setActiveButton(page);
   };
   return (
-    <aside className={`w-[60%] sm:w-auto text-[#f3f3f3] bg-[#000] dark:bg-[#1d1d1d] h-[100vh]  lg:block sm:relative ${mobileScreenNav?'fixed left-0 z-10':'hidden'} overflow-hidden scrollbar-hide`}>
+    <aside className={`z-20 w-[60%] sm:w-auto text-[#f3f3f3] bg-[#000] dark:bg-[#1d1d1d] h-[100vh]  lg:block sm:relative ${mobileScreenNav?'fixed left-0 z-10':'hidden'} overflow-hidden scrollbar-hide`}>
 
       <div className="top">
         <Link to="/">
@@ -64,8 +64,8 @@ const Leftnav = (props) => {
               </button>
             </Link>
           </div>
-          <div className="left-nav-link">
-            <Link to={'/profile'} 
+          {/* <div className="left-nav-link">
+          <Link to={'/profile'} 
             >
               <button className={`left-nav-a group ${activeButton == "page2" ? "l-nav-a-active" : ""}`}
                       onClick={() => {
@@ -77,7 +77,7 @@ const Leftnav = (props) => {
                 <h4 className="group-hover:ml-2 slowmo">Profile</h4>
               </button>
             </Link>
-          </div>
+          </div> */}
           <div className="left-nav-link">
             <Link to={'/usernameSearch'} 
             >
@@ -92,13 +92,54 @@ const Leftnav = (props) => {
               </button>
             </Link>
           </div>
+          <div className="left-nav-link">
+            <Link to={'/top-performers'}
+            >
+              <button className={`left-nav-a group ${activeButton == "page4" ? "l-nav-a-active" : ""}`}
+                      onClick={() => {
+                        handleButtonClick("page4")
+                        dispatch(toggleLeftMobileNav(!mobileScreenNav))
+                      }}
+              >
+                <span class="material-icons-sharp">leaderboard</span>
+                <h4 className="group-hover:ml-2 slowmo">LeaderBoard</h4>
+              </button>
+            </Link>
+          </div>
+          <div className="left-nav-link">
+            <Link to={'/jobs'}
+            >
+              <button className={`left-nav-a group ${activeButton === "page5" ? "l-nav-a-active" : ""}`}
+                      onClick={() => {
+                        handleButtonClick("page5")
+                        dispatch(toggleLeftMobileNav(!mobileScreenNav))
+                      }}
+              >
+                <span class="material-symbols-outlined">work</span>
+                <h4 className="group-hover:ml-2 slowmo">Jobs</h4>
+              </button>
+            </Link>
+          </div>
           <div className={`sm:hidden ${!mobileScreenNav ? 'hidden' :'left-nav-link w-[80%] mx-auto'} `}>
             <Theme/>
           </div>
         </div>
       </div>
 
-      <div className="bottom"></div>
+      <div className="aside-bottom">
+        <Link to={'/settings'} 
+        >
+          <button className={`left-nav-a group ${activeButton === "page6" ? "l-nav-a-active" : ""}`}
+            onClick={() => {
+              handleButtonClick("page6")
+              dispatch(toggleLeftMobileNav(!mobileScreenNav))
+            }}
+          >
+            <span class="material-icons-sharp">settings</span>
+            <h4 className="group-hover:ml-2 slowmo">Settings</h4>
+          </button>
+        </Link>
+      </div>
     </aside>
   );
 };

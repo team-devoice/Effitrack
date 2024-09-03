@@ -6,10 +6,10 @@ const userSchema = new schema({
     email:{type:String, required:true,unique:true},
     password:{type:String,required:true},
     created:{type:Date,default:Date.now()},
-    leetcode:{type:String,default:"unknown"},
-    codeforces:{type:String,default:"unknown"},
-    codechef:{type:String,default:"unknown"},
-    github:{type:String,default:"unknown"},
+    leetcode:{type:String,default:""},
+    codeforces:{type:String,default:""},
+    codechef:{type:String,default:""},
+    github:{type:String,default:""},
     profileImage:{
         data: { type: String, default: "" }, // Store base64-encoded image data
         contentType: { type: String, default: "" } // Store content type of the image

@@ -22,7 +22,35 @@ function validatePassword(password) {
     // Return an array of messages indicating what is wrong and missing
     return messages;
 }
+
+
+
+function calculateSkillMatchRate(mySkills, jobSkills) {
+ // Convert all skills to lowercase for case-insensitive comparison
+  const mySkillsLower = mySkills.map(skill => skill.toLowerCase());
+  const jobSkillsLower = jobSkills.map(skill => skill.toLowerCase());
+
+   // Convert arrays to sets for easier comparison
+   const mySkillSet = new Set(mySkillsLower);
+   const jobSkillSet = new Set(jobSkillsLower);
+ 
+   // Find matching skills
+   const matchingSkills = mySkillsLower.filter(skill => jobSkillSet.has(skill));
+ 
+   // Calculate match rate
+   const matchRate = (matchingSkills.length / jobSkillsLower.length) * 100;
+ 
+   return {
+     matchRate: matchRate.toFixed(2),
+     matchingSkills: matchingSkills.map(skill => 
+       mySkills[mySkillsLower.indexOf(skill)] || jobSkills[jobSkillsLower.indexOf(skill)]
+     ),
+     missingSkills: jobSkills.filter(skill => !mySkillSet.has(skill.toLowerCase()))
+   };
+}
+
   
 module.exports = {
-    validatePassword
+    validatePassword,
+    calculateSkillMatchRate
 }

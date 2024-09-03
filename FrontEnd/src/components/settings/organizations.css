@@ -1,0 +1,65 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer utilities{
+
+    .personal-details , .organization-details , .username-details , .project-details , .certification-details , .intern-details{
+        @apply border-2 border-x-white border-t-white dark:border-x-[#171717] dark:border-t-[#171717] dark:border-b-[#333] relative
+    }
+    .settings-container{
+        @apply bg-white rounded-xl px-2 py-3 dark:bg-[#171717] dark:text-[#f3f3f3]
+    }
+    .settings-profile-div{
+        @apply w-full p-2 
+    }
+    .settings-profile-div > div{
+        @apply w-[8rem] h-[8rem] rounded-full overflow-hidden border-2 border-violet-500
+    }
+    .settings-profile-img{
+        @apply w-full h-full contain
+    }
+    .switch-settings{
+        @apply flex flex-row border-2 border-x-white dark:border-x-[#171717] dark:border-y-[#333]
+    }
+    .switch-settings > div{
+        @apply px-4 py-3
+    }
+    .each-page-details{
+        @apply px-4 py-2 flex flex-col gap-y-4 
+    }
+
+    .platform-usernames-row{
+        @apply grid grid-cols-2 gap-x-4 gap-y-8 py-8 px-4
+    }
+    .platform-usernames-col{
+        @apply w-[60%] mx-auto flex flex-col gap-y-2
+    }
+    .edit-button {
+        @apply bg-blue-500 rounded-xl px-4 py-2 absolute right-4 top-4 text-white
+    }
+    .platform-usernames-col > label{
+        @apply ml-2
+    }
+    .platform-usernames-col > input , .platform-usernames-col > select{
+        @apply w-full p-4 rounded-xl bg-gray-100 dark:bg-[#333]
+    }
+    .profile-save-edit{
+        @apply p-3  flex flex-row justify-end gap-x-6
+    }
+    .profile-save-edit > button{
+        @apply px-4 py-3 rounded-xl text-lg 
+    }
+    .green-button{
+        @apply bg-green-400 text-white dark:bg-green-500
+    }
+    .gray-button{
+        @apply bg-gray-100 dark:bg-[#333]
+    }
+    .project-data-row{
+        @apply flex flex-col gap-y-4
+    }
+    .project-data-col{
+        @apply p-4
+    }
+}

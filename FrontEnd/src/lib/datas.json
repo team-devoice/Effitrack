@@ -1,0 +1,67 @@
+[
+  {
+    "companyName": "Tech Innovators",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUpLZY4G_ZM8gYW3Mc68SG3cOUdnTYp1c9VQ&s",
+    "role": "Frontend Developer",
+    "salary": "₹10,00,000 - ₹15,00,000",
+    "experience": "2-4 years",
+    "location": "Bengaluru, India",
+    "description": "We are looking for a skilled Frontend Developer to join our team. You will work on building responsive and user-friendly web applications using React and Tailwind CSS. We are looking for a creative UI/UX Designer to design and improve the user experience of our educational platforms. Experience with Figma and Adobe XD is required.",
+    "skillsRequired": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"],
+    "employmentType": "Full-time",
+    "workType": "Onsite",
+    "postedDate": "2024-08-28"
+  },
+  {
+    "companyName": "Global Finance Corp",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUpLZY4G_ZM8gYW3Mc68SG3cOUdnTYp1c9VQ&s",
+    "role": "Data Analyst",
+    "salary": "₹8,00,000 - ₹12,00,000",
+    "experience": "1-3 years",
+    "location": "Hyderabad, India",
+    "description": "Seeking a Data Analyst to interpret data and turn it into actionable insights for our financial services. Proficiency in SQL and data visualization tools is a must. We are looking for a creative UI/UX Designer to design and improve the user experience of our educational platforms. Experience with Figma and Adobe XD is required.",
+    "skillsRequired": ["SQL", "Python", "Data Visualization", "Excel"],
+    "employmentType": "Full-time",
+    "workType": "Onsite",
+    "postedDate": "2024-08-26"
+  },
+  {
+    "companyName": "HealthTech Solutions",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUpLZY4G_ZM8gYW3Mc68SG3cOUdnTYp1c9VQ&s",
+    "role": "Backend Engineer",
+    "salary": "₹12,00,000 - ₹18,00,000",
+    "experience": "3-5 years",
+    "location": "Chennai, India",
+    "description": "We are looking for a Backend Engineer with experience in Node.js and MongoDB. You will be responsible for developing and maintaining scalable server-side applications.We are looking for a creative UI/UX Designer to design and improve the user experience of our educational platforms. Experience with Figma and Adobe XD is required.",
+    "skillsRequired": ["Node.js", "MongoDB", "API Development", "AWS"],
+    "employmentType": "Full-time",
+    "workType": "Onsite",
+    "postedDate": "2024-08-25"
+  },
+  {
+    "companyName": "EduLearn Pvt Ltd",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUpLZY4G_ZM8gYW3Mc68SG3cOUdnTYp1c9VQ&s",
+    "role": "UI/UX Designer",
+    "salary": "₹7,00,000 - ₹10,00,000",
+    "experience": "2-4 years",
+    "location": "Pune, India",
+    "description": "We are looking for a creative UI/UX Designer to design and improve the user experience of our educational platforms. Experience with Figma and Adobe XD is required.We are looking for a creative UI/UX Designer to design and improve the user experience of our educational platforms. Experience with Figma and Adobe XD is required.",
+    "skillsRequired": ["UI/UX Design", "Figma", "Adobe XD", "Prototyping"],
+    "employmentType": "Full-time",
+    "workType": "Onsite",
+    "postedDate": "2024-08-24"
+  },
+  {
+    "companyName": "E-Commerce World",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUpLZY4G_ZM8gYW3Mc68SG3cOUdnTYp1c9VQ&s",
+    "role": "DevOps Engineer",
+    "salary": "₹15,00,000 - ₹20,00,000",
+    "experience": "4-6 years",
+    "location": "Delhi, India",
+    "description": "We are hiring a DevOps Engineer to manage and optimize our cloud infrastructure. Strong knowledge of Docker, Kubernetes, and CI/CD pipelines is essential.We are looking for a creative UI/UX Designer to design and improve the user experience of our educational platforms. Experience with Figma and Adobe XD is required.",
+    "skillsRequired": ["Docker", "Kubernetes", "CI/CD", "AWS", "Jenkins"],
+    "employmentType": "Full-time",
+    "workType": "Onsite",
+    "postedDate": "2024-08-23"
+  }
+]

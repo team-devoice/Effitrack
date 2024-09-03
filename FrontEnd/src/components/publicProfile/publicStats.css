@@ -18,7 +18,7 @@
     .publicStats-top{
       @apply w-full h-[80.5vh] grid sm:grid-cols-2 sm:mt-0 mt-4  
             justify-center items-center bg-white dark:bg-[#1d1d1d] 
-            text-black dark:text-white rounded-xl shadow-xl  p-2
+            text-black dark:text-white rounded-xl p-2
     }
     .text-gradient{
       background-image: linear-gradient( 108.7deg,  rgba(221,22,224,1) 11%, rgba(111,22,190,1) 88.2% );
@@ -33,14 +33,14 @@
       color: transparent;
     }
 
-    .effiuser-input{
-        @apply py-4 pr-[3.5rem] pl-[3.5rem] bg-gray-100 dark:bg-[#333] duration-300 ease-in rounded-xl font-semibold border-2;
-        /* border-radius: 16px; */
-    }
-    .effiuser-input:focus{
-        @apply bg-gray-200 dark:bg-[#333] rounded-xl border-purple-500;
-      
-    }
+    .effiuser-input {
+      @apply py-4 pr-[3.9rem] pl-[3.5rem] bg-gray-200 dark:bg-[#333] duration-300 ease-in rounded-xl font-semibold border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent;
+  }
+  
+  .effiuser-input:focus {
+      @apply bg-gray-200 dark:bg-[#333] rounded-xl focus:ring-2 focus:ring-purple-500;
+  }
+  
     .arrow-forward-button{
       @apply rounded-full h-[2rem] w-[2rem] duration-300 ease-in;
     }

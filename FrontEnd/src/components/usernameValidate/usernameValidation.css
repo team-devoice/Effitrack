@@ -19,17 +19,17 @@
     @apply w-full sm:h-[100vh] flex items-center justify-center bg-cover;
   }
   .valid_box {
-    @apply bg-slate-800 border-slate-400 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-40 text-white w-[50rem] sm:h-[37rem]  rounded-xl p-3 overflow-hidden;
+    @apply bg-slate-800 border-slate-400 backdrop-filter backdrop-blur-sm bg-opacity-40 text-white w-[50rem] sm:h-[37rem]  rounded-xl p-3 overflow-hidden;
   }
   /* bg-slate-800 border-slate-400 rounded-tr-xl shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 */
   .valid_top {
     @apply text-center flex flex-col gap-y-4;
   }
-  .validation_div form {
+  .validation_div > div {
     /* @apply grid grid-cols-2 gap-8 mt-6; */
     @apply flex flex-wrap mt-6 justify-center gap-8 
   }
-  .validation_div > form > div {
+  .validation_div > div > div {
     /* @apply flex flex-col gap-y-4 w-[80%]  m-auto h-[10rem]; */
     @apply sm:w-[45%] w-[80%] gap-y-4 h-[10rem] flex flex-col items-center
   }
